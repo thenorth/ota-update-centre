@@ -26,6 +26,8 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.text.DateFormat;
+import java.text.Normalizer;
+import java.text.Normalizer.Form;
 import java.util.Date;
 
 import android.app.AlertDialog;
@@ -52,6 +54,22 @@ import android.widget.Toast;
 
 import com.google.android.gcm.GCMRegistrar;
 import com.updater.ota.FetchRomInfoTask.RomInfoListener;
+
+final class Slugify 
+ 
+    public static String slugify(String input) {
+        if (input == null || input.length() == 0) return "";
+        String toReturn = normalize(input);
+        toReturn = toReturn.replace(" ", "-");
+        toReturn = toReturn.toLowerCase();
+        return toReturn;
+    }
+ 
+    private static String normalize(String input) {
+        if (input == null || input.length() == 0) return "";
+        return Normalizer.normalize(input, Form.NFD).replaceAll("[^\\p{ASCII}]","");
+    }
+}
 
 public class OTAUpdaterActivity extends PreferenceActivity {
     protected static final String NOTIF_ACTION = "com.updater.ota.action.NOTIF_ACTION";
@@ -289,9 +307,12 @@ public class OTAUpdaterActivity extends PreferenceActivity {
         alert.setPositiveButton(R.string.alert_download, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int whichButton) {
-            	dialog.dismiss();
+dialog.dismiss();
 
-            	final File file = new File(Config.DL_PATH + info.romName + "_" + info.version + ".zip");
+                String fileName = info.romName + "_" + info.version;
+                String slugifiedFileName = Slugify.slugify(fileName);
+
+                final File file = new File(Config.DL_PATH + slugifiedFileName + ".zip");
             	if (file.exists()) {
             	    Log.v("OTAUpdater::Download", "Found old zip, checking md5");
             	    
