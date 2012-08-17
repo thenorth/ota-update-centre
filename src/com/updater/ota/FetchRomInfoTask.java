@@ -38,12 +38,12 @@ public class FetchRomInfoTask extends AsyncTask<Void, Void, RomInfo> {
     private String error = null;
 
     public FetchRomInfoTask(Context ctx) {
-    	this(ctx, null);
+        this(ctx, null);
     }
 
     public FetchRomInfoTask(Context ctx, RomInfoListener callback) {
-    	this.context = ctx;
-    	this.callback = callback;
+        this.context = ctx;
+        this.callback = callback;
     }
 
     @Override
@@ -77,9 +77,9 @@ public class FetchRomInfoTask extends AsyncTask<Void, Void, RomInfo> {
                 JSONObject json = new JSONObject(data);
 
                 if (json.has("error")) {
-                	Log.e("OTA::Fetch", json.getString("error"));
-                	error = json.getString("error");
-                	return null;
+                    Log.e("OTA::Fetch", json.getString("error"));
+                    error = json.getString("error");
+                    return null;
                 }
 
                 return new RomInfo(
@@ -87,8 +87,8 @@ public class FetchRomInfoTask extends AsyncTask<Void, Void, RomInfo> {
                         json.getString("version"),
                         json.getString("changelog"),
                         json.getString("url"),
-                		json.getString("md5"),
-                		Utils.parseDate(json.getString("date")));
+                        json.getString("md5"),
+                        Utils.parseDate(json.getString("date")));
             } else {
                 if (e != null) e.consumeContent();
                 error = "Server responded with error " + status;

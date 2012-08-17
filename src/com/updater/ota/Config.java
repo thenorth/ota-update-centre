@@ -30,44 +30,44 @@ public class Config {
     public static final String OTA_ID_PROP = "otaupdater.otaid";
     public static final String OTA_VER_PROP = "otaupdater.otaver";
     public static final String OTA_DATE_PROP = "otaupdater.otatime";
-    
+
     public static final int WAKE_TIMEOUT = 30000;
-    
+
     public static final String DL_PATH = Environment.getExternalStorageDirectory() + "/OTA-Updater/download/";
     public static final File DL_PATH_FILE = new File(Config.DL_PATH);
     static {
         DL_PATH_FILE.mkdirs();
     }
-    
+
     private int lastVersion = -1;
     private String lastDevice = null;
     private String lastRomID = null;
-    
+
     private int curVersion = -1;
     private String curDevice = null;
     private String curRomID = null;
-    
+
     private RomInfo storedUpdate = null;
-    
+
     private static final String PREFS_NAME = "prefs";
     private final SharedPreferences PREFS;
-    
+
     private Config(Context ctx) {
         PREFS = ctx.getApplicationContext().getSharedPreferences(PREFS_NAME, 0);
-        
+
         lastVersion = PREFS.getInt("version", lastVersion);
         lastDevice = PREFS.getString("device", lastDevice);
         lastRomID = PREFS.getString("romid", lastRomID);
-        
+
         if (PREFS.contains("info_rom")) {
-            storedUpdate = new RomInfo(PREFS.getString("info_rom", null), 
-                    PREFS.getString("info_version", null), 
-                    PREFS.getString("info_changelog", null), 
-                    PREFS.getString("info_url", null), 
-                    PREFS.getString("info_md5", null), 
+            storedUpdate = new RomInfo(PREFS.getString("info_rom", null),
+                    PREFS.getString("info_version", null),
+                    PREFS.getString("info_changelog", null),
+                    PREFS.getString("info_url", null),
+                    PREFS.getString("info_md5", null),
                     Utils.parseDate(PREFS.getString("info_date", null)));
         }
-        
+
         try {
             curVersion = ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).versionCode;
         } catch (NameNotFoundException e) {
@@ -80,19 +80,19 @@ public class Config {
         if (instance == null) instance = new Config(ctx);
         return instance;
     }
-    
+
     public int getLastVersion() {
         return lastVersion;
     }
-    
+
     public String getLastDevice() {
         return lastDevice;
     }
-    
+
     public String getLastRomID() {
         return lastRomID;
     }
-    
+
     public void setValuesToCurrent() {
         synchronized (PREFS) {
             SharedPreferences.Editor editor = PREFS.edit();
@@ -102,41 +102,41 @@ public class Config {
             editor.commit();
         }
     }
-    
+
     public boolean upToDate() {
         if (lastDevice == null) return false;
         if (lastRomID == null) return false;
         if (curRomID == null) return false;
         return curVersion == lastVersion && curDevice.equals(lastDevice) && curRomID.equals(lastRomID);
     }
-    
+
     public boolean hasStoredUpdate() {
         return storedUpdate != null;
     }
-    
+
     public RomInfo getStoredUpdate() {
         return storedUpdate;
     }
-    
+
     public void storeUpdate(RomInfo info) {
         synchronized (PREFS) {
             SharedPreferences.Editor editor = PREFS.edit();
             editor.putString("info_rom", info.romName);
-            editor.putString("info_version", info.version); 
-            editor.putString("info_changelog", info.changelog); 
+            editor.putString("info_version", info.version);
+            editor.putString("info_changelog", info.changelog);
             editor.putString("info_url", info.url);
             editor.putString("info_md5", info.md5);
             editor.putString("info_date", Utils.formatDate(info.date));
             editor.commit();
         }
     }
-    
+
     public void clearStoredUpdate() {
         synchronized (PREFS) {
             SharedPreferences.Editor editor = PREFS.edit();
             editor.remove("info_rom");
-            editor.remove("info_version"); 
-            editor.remove("info_changelog"); 
+            editor.remove("info_version");
+            editor.remove("info_changelog");
             editor.remove("info_url");
             editor.remove("info_md5");
             editor.remove("info_date");

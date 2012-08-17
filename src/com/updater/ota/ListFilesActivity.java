@@ -65,7 +65,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
         this.getListView().setOnItemClickListener(this);
         this.getListView().setOnItemLongClickListener(this);
     }
-    
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -106,7 +106,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                     listFiles(Config.DL_PATH_FILE);
                 }
             });
-            
+
             alert.create().show();
             break;
         case R.id.list_refresh:
@@ -124,7 +124,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id) {
         processItem(pos);
-		return true;
+        return true;
     }
 
     private void processItem(final int pos) {
@@ -141,7 +141,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                 AlertDialog.Builder alert;
                 switch (which) {
                 case 0:
-                	installFileDialog(ListFilesActivity.this, file);
+                    installFileDialog(ListFilesActivity.this, file);
                     break;
                 case 1:
                     alert = new AlertDialog.Builder(ListFilesActivity.this);
@@ -198,7 +198,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
     }
 
     protected static void installFileDialog(final Context ctx, final File file) {
-    	Resources r = ctx.getResources();
+        Resources r = ctx.getResources();
         String[] installOpts = r.getStringArray(R.array.install_options);
         final boolean[] selectedOpts = new boolean[installOpts.length];
         selectedOpts[selectedOpts.length - 1] = true;
@@ -225,7 +225,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
-                    
+
                     AlertDialog.Builder alert = new AlertDialog.Builder(ctx);
                     alert.setTitle(R.string.alert_install_title);
                     alert.setMessage(R.string.alert_install_message);
@@ -235,14 +235,14 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                             try {
                                 String path = file.getAbsolutePath();
                                 if (path.startsWith("/mnt")) path = path.substring(4);
-                                
+
                                 Process p = Runtime.getRuntime().exec("su");
                                 DataOutputStream os = new DataOutputStream(p.getOutputStream());
                                 os.writeBytes("rm -f /cache/recovery/command\n");
                                 os.writeBytes("rm -f /cache/recovery/extendedcommand\n");
 //                                if (selectedOpts[0]) {
-//                                    os.writeBytes("echo 'backup_rom /sdcard/clockwordmod/backup/" + 
-//                                            new SimpleDateFormat("yyyy-MM-dd_HH.mm").format(new Date()) + 
+//                                    os.writeBytes("echo 'backup_rom /sdcard/clockwordmod/backup/" +
+//                                            new SimpleDateFormat("yyyy-MM-dd_HH.mm").format(new Date()) +
 //                                            "' >> /cache/recovery/extendedcommand\n");
 //                                }
                                 if (selectedOpts[0]) {
@@ -280,7 +280,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
         }
         alert.create().show();
     }
-    
+
     private void pruneFiles(long maxAge) {
         File dir = new File(Config.DL_PATH);
         File[] files = dir.listFiles();

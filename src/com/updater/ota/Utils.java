@@ -37,7 +37,7 @@ public class Utils {
     private static String cachedRomID = null;
     private static Date cachedOtaDate = null;
     private static String cachedOtaVer = null;
-    
+
     public static boolean marketAvailable(Context ctx) {
         PackageManager pm = ctx.getPackageManager();
         try {
@@ -47,19 +47,19 @@ public class Utils {
         }
         return true;
     }
-    
+
     public static boolean isROMSupported() {
         String romID = getRomID();
         return romID != null && romID.length() != 0;
     }
-    
+
     public static String getRomID() {
         if (cachedRomID == null) {
             cachedRomID = getprop(Config.OTA_ID_PROP);
         }
         return cachedRomID;
     }
-    
+
     public static Date getOtaDate() {
         if (cachedOtaDate == null) {
             String otaDateStr = getprop(Config.OTA_DATE_PROP);
@@ -68,18 +68,18 @@ public class Utils {
         }
         return cachedOtaDate;
     }
-    
+
     public static String getOtaVersion() {
         if (cachedOtaVer == null) {
             cachedOtaVer = getprop(Config.OTA_VER_PROP);
         }
         return cachedOtaVer;
     }
-    
+
     private static String getprop(String name) {
         ProcessBuilder pb = new ProcessBuilder("/system/bin/getprop", name);
         pb.redirectErrorStream(true);
-        
+
         Process p = null;
         InputStream is = null;
         try {
@@ -100,13 +100,13 @@ public class Utils {
         }
         return null;
     }
-    
+
     public static boolean dataAvailable(Context ctx) {
         ConnectivityManager cm = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
         return ni != null && ni.isConnected();
     }
-    
+
     public static Date parseDate(String date) {
         if (date == null) return null;
         try {
@@ -116,12 +116,12 @@ public class Utils {
         }
         return null;
     }
-    
+
     public static String formatDate(Date date) {
         if (date == null) return null;
         return new SimpleDateFormat("yyyyMMdd-kkmm").format(date);
     }
-    
+
     public static boolean isUpdate(RomInfo info) {
         if (info == null) return false;
         if (info.version != null) {
@@ -132,12 +132,12 @@ public class Utils {
         }
         return false;
     }
-    
+
     public static void showUpdateNotif(Context ctx, RomInfo info) {
         Intent i = new Intent(ctx, OTAUpdaterActivity.class);
         i.setAction(OTAUpdaterActivity.NOTIF_ACTION);
         info.addToIntent(i);
-        
+
         NotificationManager nm = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
         PendingIntent contentIntent = PendingIntent.getActivity(ctx, 0, i, PendingIntent.FLAG_CANCEL_CURRENT);
 
@@ -150,7 +150,7 @@ public class Utils {
         builder.setSmallIcon(R.drawable.updates);
         nm.notify(1, builder.getNotification());
     }
-    
+
     private static final char[] HEX_DIGITS = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
     public static String byteArrToStr(byte[] bytes) {
         StringBuffer str = new StringBuffer();

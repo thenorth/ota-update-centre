@@ -37,44 +37,44 @@ import com.google.android.gcm.GCMBaseIntentService;
 
 public class GCMIntentService extends GCMBaseIntentService {
 
-	public GCMIntentService() {
-		super(Config.GCM_SENDER_ID);
-	}
+    public GCMIntentService() {
+        super(Config.GCM_SENDER_ID);
+    }
 
-	@Override
-	protected void onError(Context ctx, String errorID) {
-		Log.e("OTAUpdater::GCM", errorID);
-	}
+    @Override
+    protected void onError(Context ctx, String errorID) {
+        Log.e("OTAUpdater::GCM", errorID);
+    }
 
-	@Override
-	protected void onMessage(Context ctx, Intent payload) {
-		RomInfo info = RomInfo.fromIntent(payload);
-		
-		if (!Utils.isUpdate(info)) {
-		    Config.getInstance(getApplicationContext()).clearStoredUpdate();
-		    return;
-		}
-		
-		Config.getInstance(getApplicationContext()).storeUpdate(info);    
-		Utils.showUpdateNotif(ctx, info);
-	}
+    @Override
+    protected void onMessage(Context ctx, Intent payload) {
+        RomInfo info = RomInfo.fromIntent(payload);
 
-	@Override
-	protected void onRegistered(Context ctx, String regID) {
-	    Log.v("OTAUpdater::GCMRegister", "GCM registered - ID=" + regID);
-		ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
-		params.add(new BasicNameValuePair("do", "register"));
-		params.add(new BasicNameValuePair("reg_id", regID));
-		params.add(new BasicNameValuePair("device", android.os.Build.DEVICE.toLowerCase()));
-		params.add(new BasicNameValuePair("rom_id", Utils.getRomID()));
-		params.add(new BasicNameValuePair("device_id", ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId()));
+        if (!Utils.isUpdate(info)) {
+            Config.getInstance(getApplicationContext()).clearStoredUpdate();
+            return;
+        }
 
-		try {
-			HttpClient http = new DefaultHttpClient();
-			HttpPost req = new HttpPost(Config.GCM_REGISTER_URL);
-			req.setEntity(new UrlEncodedFormEntity(params));
-			
-			HttpResponse r = http.execute(req);
+        Config.getInstance(getApplicationContext()).storeUpdate(info);
+        Utils.showUpdateNotif(ctx, info);
+    }
+
+    @Override
+    protected void onRegistered(Context ctx, String regID) {
+        Log.v("OTAUpdater::GCMRegister", "GCM registered - ID=" + regID);
+        ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
+        params.add(new BasicNameValuePair("do", "register"));
+        params.add(new BasicNameValuePair("reg_id", regID));
+        params.add(new BasicNameValuePair("device", android.os.Build.DEVICE.toLowerCase()));
+        params.add(new BasicNameValuePair("rom_id", Utils.getRomID()));
+        params.add(new BasicNameValuePair("device_id", ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId()));
+
+        try {
+            HttpClient http = new DefaultHttpClient();
+            HttpPost req = new HttpPost(Config.GCM_REGISTER_URL);
+            req.setEntity(new UrlEncodedFormEntity(params));
+
+            HttpResponse r = http.execute(req);
             int status = r.getStatusLine().getStatusCode();
             HttpEntity e = r.getEntity();
             if (status == 200) {
@@ -89,7 +89,7 @@ public class GCMIntentService extends GCMBaseIntentService {
                     Log.w("OTA::GCMRegister", "Empty response to registration");
                     return;
                 }
-                
+
                 if (json.has("error")) {
                     Log.e("OTA::GCMRegister", json.getString("error"));
                     return;
@@ -102,7 +102,7 @@ public class GCMIntentService extends GCMBaseIntentService {
                         json.getString("url"),
                         json.getString("md5"),
                         Utils.parseDate(json.getString("date")));
-                
+
                 if (Utils.isUpdate(info)) {
                     Config.getInstance(getApplicationContext()).storeUpdate(info);
                     Utils.showUpdateNotif(getApplicationContext(), info);
@@ -113,28 +113,28 @@ public class GCMIntentService extends GCMBaseIntentService {
                 if (e != null) e.consumeContent();
                 Log.w("OTA::GCMRegistr", "registration response " + status);
             }
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
-	@Override
-	protected void onUnregistered(Context ctx, String regID) {
+    @Override
+    protected void onUnregistered(Context ctx, String regID) {
         Log.v("OTAUpdater::GCMRegister", "GCM unregistered - ID=" + regID);
-		ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
-		params.add(new BasicNameValuePair("do", "unregister"));
-		params.add(new BasicNameValuePair("reg_id", regID));
+        ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
+        params.add(new BasicNameValuePair("do", "unregister"));
+        params.add(new BasicNameValuePair("reg_id", regID));
 
-		try {
-			HttpClient http = new DefaultHttpClient();
-			HttpPost req = new HttpPost(Config.GCM_REGISTER_URL);
-			req.setEntity(new UrlEncodedFormEntity(params));
-			HttpResponse resp = http.execute(req);
-			if (resp.getStatusLine().getStatusCode() != 200) {
-				Log.w("OTA::GCM", "unregistration response non-200");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+        try {
+            HttpClient http = new DefaultHttpClient();
+            HttpPost req = new HttpPost(Config.GCM_REGISTER_URL);
+            req.setEntity(new UrlEncodedFormEntity(params));
+            HttpResponse resp = http.execute(req);
+            if (resp.getStatusLine().getStatusCode() != 200) {
+                Log.w("OTA::GCM", "unregistration response non-200");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
