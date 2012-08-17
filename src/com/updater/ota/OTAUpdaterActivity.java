@@ -55,7 +55,7 @@ import android.widget.Toast;
 import com.google.android.gcm.GCMRegistrar;
 import com.updater.ota.FetchRomInfoTask.RomInfoListener;
 
-final class Slugify 
+final class Slugify {
  
     public static String slugify(String input) {
         if (input == null || input.length() == 0) return "";
