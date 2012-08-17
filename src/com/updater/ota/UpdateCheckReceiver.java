@@ -29,27 +29,27 @@ import com.google.android.gcm.GCMRegistrar;
 import com.updater.ota.FetchRomInfoTask.RomInfoListener;
 
 public class UpdateCheckReceiver extends BroadcastReceiver {
-	@Override
-	public void onReceive(final Context context, Intent intent) {
-	    final Config cfg = Config.getInstance(context.getApplicationContext());
-	    
-	    if (cfg.hasStoredUpdate()) {
-	        RomInfo info = cfg.getStoredUpdate();
-	        if (Utils.isUpdate(info)) {
-	            Log.v("OTAUpdater", "Found stored update");
-	            Utils.showUpdateNotif(context, info);
-	        } else {
-	            Log.v("OTAUpdater", "Found invalid stored update");
-	            cfg.clearStoredUpdate();
-	        }
-	    } else {
-	        Log.v("OTAUpdater", "No stored update");
-	    }
-	    
-	    if (Utils.isROMSupported()) {
-	        if (Utils.marketAvailable(context)) {
-	            Log.v("OTAUpdater", "Found market, trying GCM");
-        	    GCMRegistrar.checkDevice(context.getApplicationContext());
+    @Override
+    public void onReceive(final Context context, Intent intent) {
+        final Config cfg = Config.getInstance(context.getApplicationContext());
+
+        if (cfg.hasStoredUpdate()) {
+            RomInfo info = cfg.getStoredUpdate();
+            if (Utils.isUpdate(info)) {
+                Log.v("OTAUpdater", "Found stored update");
+                Utils.showUpdateNotif(context, info);
+            } else {
+                Log.v("OTAUpdater", "Found invalid stored update");
+                cfg.clearStoredUpdate();
+            }
+        } else {
+            Log.v("OTAUpdater", "No stored update");
+        }
+
+        if (Utils.isROMSupported()) {
+            if (Utils.marketAvailable(context)) {
+                Log.v("OTAUpdater", "Found market, trying GCM");
+                GCMRegistrar.checkDevice(context.getApplicationContext());
                 GCMRegistrar.checkManifest(context.getApplicationContext());
                 final String regId = GCMRegistrar.getRegistrationId(context.getApplicationContext());
                 if (regId.length() != 0) {
@@ -66,40 +66,40 @@ public class UpdateCheckReceiver extends BroadcastReceiver {
                     GCMRegistrar.register(context.getApplicationContext(), Config.GCM_SENDER_ID);
                     Log.v("OTAUpdater::GCMRegister", "GCM registered");
                 }
-	        } else {
-	            Log.v("OTAUpdater", "No market, using pull method");
-	            if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-	                setAlarm(context);
-	            }
+            } else {
+                Log.v("OTAUpdater", "No market, using pull method");
+                if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
+                    setAlarm(context);
+                }
 
-	            PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
-	            final WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, UpdateCheckReceiver.class.getName());
-	            wl.acquire();
+                PowerManager pm = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+                final WakeLock wl = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, UpdateCheckReceiver.class.getName());
+                wl.acquire();
 
-	            new FetchRomInfoTask(context, new RomInfoListener() {
-	                @Override
-	                public void onStartLoading() { }
-	                @Override
-	                public void onLoaded(RomInfo info) {
-	                    if (Utils.isUpdate(info)) {
-	                        cfg.storeUpdate(info);
-	                        Utils.showUpdateNotif(context, info);
-	                    } else {
+                new FetchRomInfoTask(context, new RomInfoListener() {
+                    @Override
+                    public void onStartLoading() { }
+                    @Override
+                    public void onLoaded(RomInfo info) {
+                        if (Utils.isUpdate(info)) {
+                            cfg.storeUpdate(info);
+                            Utils.showUpdateNotif(context, info);
+                        } else {
                             cfg.clearStoredUpdate();
-	                    }
+                        }
 
-	                    wl.release();
-	                }
-	                @Override
-	                public void onError(String error) {
-	                    wl.release();
-	                }
-	            }).execute();
-	        }
-	    } else {
-	        Log.w("OTAUpdater", "Unsupported ROM");
-	    }
-	}
+                        wl.release();
+                    }
+                    @Override
+                    public void onError(String error) {
+                        wl.release();
+                    }
+                }).execute();
+            }
+        } else {
+            Log.w("OTAUpdater", "Unsupported ROM");
+        }
+    }
 
     protected static void setAlarm(Context ctx) {
         AlarmManager am = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);

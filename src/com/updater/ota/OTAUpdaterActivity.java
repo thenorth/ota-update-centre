@@ -56,7 +56,7 @@ import com.google.android.gcm.GCMRegistrar;
 import com.updater.ota.FetchRomInfoTask.RomInfoListener;
 
 final class Slugify {
- 
+
     public static String slugify(String input) {
         if (input == null || input.length() == 0) return "";
         String toReturn = normalize(input);
@@ -64,7 +64,7 @@ final class Slugify {
         toReturn = toReturn.toLowerCase();
         return toReturn;
     }
- 
+
     private static String normalize(String input) {
         if (input == null || input.length() == 0) return "";
         return Normalizer.normalize(input, Form.NFD).replaceAll("[^\\p{ASCII}]","");
@@ -75,11 +75,11 @@ public class OTAUpdaterActivity extends PreferenceActivity {
     protected static final String NOTIF_ACTION = "com.updater.ota.action.NOTIF_ACTION";
 
     private boolean ignoredDataWarn = true;
-    
+
     private boolean dialogFromNotif = false;
     private boolean checkOnResume = false;
     private Config cfg;
-    
+
     private boolean fetching = false;
     private Preference availUpdatePref;
 
@@ -90,30 +90,30 @@ public class OTAUpdaterActivity extends PreferenceActivity {
         super.onCreate(savedInstanceState);
 
         cfg = Config.getInstance(getApplicationContext());
-        
+
         if (!Utils.isROMSupported()) {
-        	AlertDialog.Builder alert = new AlertDialog.Builder(this);
-        	alert.setTitle(R.string.alert_unsupported_title);
-        	alert.setMessage(R.string.alert_unsupported_message);
-        	alert.setCancelable(false);
-        	alert.setPositiveButton(R.string.alert_exit, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-					finish();
-				}
-			});
-        	alert.create().show();
-        	
-        	if (Utils.marketAvailable(this)) {
-        	    GCMRegistrar.checkDevice(getApplicationContext());
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle(R.string.alert_unsupported_title);
+            alert.setMessage(R.string.alert_unsupported_message);
+            alert.setCancelable(false);
+            alert.setPositiveButton(R.string.alert_exit, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    finish();
+                }
+            });
+            alert.create().show();
+
+            if (Utils.marketAvailable(this)) {
+                GCMRegistrar.checkDevice(getApplicationContext());
                 GCMRegistrar.checkManifest(getApplicationContext());
                 final String regId = GCMRegistrar.getRegistrationId(getApplicationContext());
                 if (regId.length() != 0) {
                     GCMRegistrar.unregister(getApplicationContext());
                 }
-        	}
-        } else { 
+            }
+        } else {
             if (Utils.marketAvailable(this)) {
                 GCMRegistrar.checkDevice(getApplicationContext());
                 GCMRegistrar.checkManifest(getApplicationContext());
@@ -137,14 +137,14 @@ public class OTAUpdaterActivity extends PreferenceActivity {
             }
 
             addPreferencesFromResource(R.xml.main);
-    
+
             String romVersion = Utils.getOtaVersion();
             if (romVersion == null) romVersion = android.os.Build.ID;
             Date romDate = Utils.getOtaDate();
             if (romDate != null) {
                 romVersion += " (" + DateFormat.getDateTimeInstance().format(romDate) + ")";
             }
-            
+
             final Preference device = findPreference("device_view");
             device.setSummary(android.os.Build.DEVICE.toLowerCase());
             final Preference rom = findPreference("rom_view");
@@ -153,9 +153,9 @@ public class OTAUpdaterActivity extends PreferenceActivity {
             version.setSummary(romVersion);
             final Preference build = findPreference("otaid_view");
             build.setSummary(Utils.getRomID());
-            
+
             availUpdatePref = findPreference("avail_updates");
-            
+
             Intent i = getIntent();
             if (i.getAction().equals(NOTIF_ACTION)) {
                 if (Utils.dataAvailable(getApplicationContext())) {
@@ -196,7 +196,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                     ignoredDataWarn = true;
-                    
+
                     if (Utils.dataAvailable(getApplicationContext())) {
                         Intent i = getIntent();
                         if (i.getAction().equals(NOTIF_ACTION)) {
@@ -277,11 +277,11 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                 fetching = true;
             }
             @Override
-			public void onLoaded(RomInfo info) {
+            public void onLoaded(RomInfo info) {
                 fetching = false;
                 if (info == null) {
                     availUpdatePref.setSummary(getString(R.string.main_updates_error, "Unknown error"));
-                	Toast.makeText(OTAUpdaterActivity.this, R.string.toast_fetch_error, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OTAUpdaterActivity.this, R.string.toast_fetch_error, Toast.LENGTH_SHORT).show();
                 } else if (Utils.isUpdate(info)) {
                     showUpdateDialog(info);
                 } else {
@@ -299,7 +299,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
     }
 
     private void showUpdateDialog(final RomInfo info) {
-    	AlertDialog.Builder alert = new AlertDialog.Builder(OTAUpdaterActivity.this);
+        AlertDialog.Builder alert = new AlertDialog.Builder(OTAUpdaterActivity.this);
         alert.setTitle(R.string.alert_update_title);
         alert.setMessage(getString(R.string.alert_update_to, info.romName, info.version));
         availUpdatePref.setSummary(getString(R.string.main_updates_new, info.romName, info.version));
@@ -307,20 +307,20 @@ public class OTAUpdaterActivity extends PreferenceActivity {
         alert.setPositiveButton(R.string.alert_download, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int whichButton) {
-dialog.dismiss();
+                dialog.dismiss();
 
                 String fileName = info.romName + "_" + info.version;
                 String slugifiedFileName = Slugify.slugify(fileName);
 
                 final File file = new File(Config.DL_PATH + slugifiedFileName + ".zip");
-            	if (file.exists()) {
-            	    Log.v("OTAUpdater::Download", "Found old zip, checking md5");
-            	    
-            	    InputStream is = null;
-            	    try {
-            	        is = new FileInputStream(file);
-            	        MessageDigest digest = MessageDigest.getInstance("MD5");
-            	        byte[] data = new byte[4096];
+                if (file.exists()) {
+                    Log.v("OTAUpdater::Download", "Found old zip, checking md5");
+
+                    InputStream is = null;
+                    try {
+                        is = new FileInputStream(file);
+                        MessageDigest digest = MessageDigest.getInstance("MD5");
+                        byte[] data = new byte[4096];
                         int nRead = -1;
                         while ((nRead = is.read(data)) != -1) {
                             digest.update(data, 0, nRead);
@@ -333,41 +333,41 @@ dialog.dismiss();
                             ListFilesActivity.installFileDialog(OTAUpdaterActivity.this, file);
                             return;
                         }
-            	    } catch (Exception e) {
-            	        e.printStackTrace();
-            	        file.delete();
-            	    } finally {
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        file.delete();
+                    } finally {
                         if (is != null) {
                             try { is.close(); }
                             catch (Exception e) { }
                         }
                     }
-            	}
+                }
 
-            	final ProgressDialog progressDialog = new ProgressDialog(OTAUpdaterActivity.this);
-            	progressDialog.setTitle(R.string.alert_downloading);
-            	progressDialog.setMessage("Changelog: " + info.changelog);
+                final ProgressDialog progressDialog = new ProgressDialog(OTAUpdaterActivity.this);
+                progressDialog.setTitle(R.string.alert_downloading);
+                progressDialog.setMessage("Changelog: " + info.changelog);
                 progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 progressDialog.setCancelable(false);
                 progressDialog.setProgress(0);
-                
+
                 PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
                 final WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, UpdateCheckReceiver.class.getName());
                 wl.acquire();
-                
+
                 final AsyncTask<Void, Integer, Integer> dlTask = new AsyncTask<Void, Integer, Integer>() {
                     private int scale = 1048576;
-                    
-					@Override
-					protected void onPreExecute() {
-						progressDialog.show();
-					}
 
-					@Override
-					protected Integer doInBackground(Void... params) {
-					    InputStream is = null;
-					    OutputStream os = null;
-						try {
+                    @Override
+                    protected void onPreExecute() {
+                        progressDialog.show();
+                    }
+
+                    @Override
+                    protected Integer doInBackground(Void... params) {
+                        InputStream is = null;
+                        OutputStream os = null;
+                        try {
                             URL getUrl = new URL(info.url);
                             Log.v("OTAUpdater::Download", "downloading from: " + getUrl);
                             Log.d("OTAUpdater::Download", "downloading to: " + file.getAbsolutePath());
@@ -378,7 +378,7 @@ dialog.dismiss();
                             publishProgress(0, lengthOfFile);
 
                             MessageDigest digest = MessageDigest.getInstance("MD5");
-                            
+
                             conn.connect();
                             is = new BufferedInputStream(getUrl.openStream());
                             os = new FileOutputStream(file);
@@ -387,7 +387,7 @@ dialog.dismiss();
                             int nRead = -1;
                             int totalRead = 0;
                             while ((nRead = is.read(data)) != -1) {
-                            	if (this.isCancelled()) break;
+                                if (this.isCancelled()) break;
                                 os.write(data, 0, nRead);
                                 digest.update(data, 0, nRead);
                                 totalRead += nRead;
@@ -395,10 +395,10 @@ dialog.dismiss();
                             }
 
                             if (isCancelled()) {
-                            	file.delete();
-                            	return 2;
+                                file.delete();
+                                return 2;
                             }
-                            
+
                             String dlMd5 = Utils.byteArrToStr(digest.digest());
                             Log.v("OTAUpdater::Download", "downloaded md5: " + dlMd5);
                             if (!info.md5.equalsIgnoreCase(dlMd5)) {
@@ -422,14 +422,14 @@ dialog.dismiss();
                             }
                         }
                         return -1;
-					}
+                    }
 
-					@Override
+                    @Override
                     protected void onCancelled(Integer result) {
-					    progressDialog.dismiss();
-					    wl.release();
-					    wl.acquire(Config.WAKE_TIMEOUT);
-					    
+                        progressDialog.dismiss();
+                        wl.release();
+                        wl.acquire(Config.WAKE_TIMEOUT);
+
                         switch (result) {
                         case 0:
                             break;
@@ -445,43 +445,43 @@ dialog.dismiss();
                     }
 
                     @Override
-					protected void onPostExecute(Integer result) {
-						progressDialog.dismiss();
-						wl.release();
+                    protected void onPostExecute(Integer result) {
+                        progressDialog.dismiss();
+                        wl.release();
                         wl.acquire(Config.WAKE_TIMEOUT);
-                        
-						switch (result) {
-						case 0:
-						    ListFilesActivity.installFileDialog(OTAUpdaterActivity.this, file);
-						    break;
-						case 1:
-						    Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_md5_mismatch, Toast.LENGTH_SHORT).show();
-						    break;
-						case 2:
-						    Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_interrupted, Toast.LENGTH_SHORT).show();
-						    break;
-						default:
-						    Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_error, Toast.LENGTH_SHORT).show();
-						}
-					}
 
-					@Override
-					protected void onProgressUpdate(Integer... values) {
-						if (values.length == 0) return;
+                        switch (result) {
+                        case 0:
+                            ListFilesActivity.installFileDialog(OTAUpdaterActivity.this, file);
+                            break;
+                        case 1:
+                            Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_md5_mismatch, Toast.LENGTH_SHORT).show();
+                            break;
+                        case 2:
+                            Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_interrupted, Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_error, Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    protected void onProgressUpdate(Integer... values) {
+                        if (values.length == 0) return;
                         progressDialog.setProgress(values[0] / scale);
                         if (values.length == 1) return;
                         progressDialog.setMax(values[1] / scale);
-					}
-				};
-				
-				progressDialog.setButton(Dialog.BUTTON_NEGATIVE, getString(R.string.alert_cancel), new DialogInterface.OnClickListener() {
+                    }
+                };
+
+                progressDialog.setButton(Dialog.BUTTON_NEGATIVE, getString(R.string.alert_cancel), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         progressDialog.dismiss();
                         dlTask.cancel(true);
                     }
                 });
-				
+
                 dlTask.execute();
             }
         });

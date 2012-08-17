@@ -32,9 +32,9 @@ public class UpdaterAbout extends PreferenceActivity {
 
         versionPref = findPreference("about_version");
         try {
-			versionPref.setSummary(getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
-		} catch (NameNotFoundException e) {
-			versionPref.setSummary(R.string.about_version_unknown);
-		}
+            versionPref.setSummary(getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
+        } catch (NameNotFoundException e) {
+            versionPref.setSummary(R.string.about_version_unknown);
+        }
     }
 }
