@@ -196,6 +196,8 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
         builder.setCancelable(true);
         builder.create().show();
     }
+    
+    public static final String OTA_PATH_RECOVERY_PROP = "otaupdater.sdcard.recovery";
 
     protected static void installFileDialog(final Context ctx, final File file) {
         Resources r = ctx.getResources();
@@ -252,6 +254,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                                 }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                                 os.writeBytes("echo '--update_package=/" + OTA_PATH_RECOVERY_PROP + "/OTA-Updater/download/ " + name + "' >> /cache/recovery/command\n");
 =======
                                 os.writeBytes("echo '--update_package=/" + Utils.getReProp() + "/OTA-Updater/download/" + name + "' >> /cache/recovery/command\n");
@@ -259,6 +262,9 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
 =======
                                 os.writeBytes("echo '--update_package=/" + Utils.getReProp() + "/OTA-Updater/download/ " + name + "' >> /cache/recovery/command\n");
 >>>>>>> 574ad81... More changes to the new way to tell where to download and where to recover from
+=======
+                                os.writeBytes("echo '--update_package=/" + OTA_PATH_RECOVERY_PROP + "/OTA-Updater/download/ " + name + "' >> /cache/recovery/command\n");
+>>>>>>> fd740d2... Added way to define download and recovert path from build.prop
                                 os.writeBytes("reboot recovery\n");
                                 os.writeBytes("exit\n");
                                 os.flush();
