@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.updater.ota"
-    android:versionCode="5"
-    android:versionName="0.99-RC4">
+    android:versionCode="6"
+    android:versionName="0.99-RC5">
 
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="15" />
     
@@ -35,20 +35,20 @@
         
         <receiver android:name="com.google.android.gcm.GCMBroadcastReceiver"
             android:permission="com.google.android.c2dm.permission.SEND">
-		    <intent-filter>
-			    <action android:name="com.google.android.c2dm.intent.RECEIVE" />
-			    <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
-			    <category android:name="com.updater.ota" />
-		    </intent-filter>
-		</receiver>
-		
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+                <category android:name="com.updater.ota" />
+            </intent-filter>
+        </receiver>
+        
         <service android:name=".GCMIntentService" />
         
-		<receiver android:name=".UpdateCheckReceiver">
-			<intent-filter>
-				<action android:name="android.intent.action.BOOT_COMPLETED"></action>
-			</intent-filter>
-		</receiver>
+        <receiver android:name=".UpdateCheckReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
         
         <activity
             android:name=".ListFilesActivity"
