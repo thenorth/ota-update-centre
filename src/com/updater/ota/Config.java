@@ -30,10 +30,11 @@ public class Config {
     public static final String OTA_ID_PROP = "otaupdater.otaid";
     public static final String OTA_VER_PROP = "otaupdater.otaver";
     public static final String OTA_DATE_PROP = "otaupdater.otatime";
+    public static final String OTA_PATH_OS_PROP = "otaupdater.sdcard.os";
 
     public static final int WAKE_TIMEOUT = 30000;
 
-    public static final String DL_PATH = Environment.getExternalStorageDirectory() + "/OTA-Updater/download/";
+    public static final String DL_PATH = "/" + OTA_PATH_OS_PROP + "/OTA-Updater/download/";
     public static final File DL_PATH_FILE = new File(Config.DL_PATH);
     static {
         DL_PATH_FILE.mkdirs();

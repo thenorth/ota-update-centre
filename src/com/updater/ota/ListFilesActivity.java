@@ -196,6 +196,8 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
         builder.setCancelable(true);
         builder.create().show();
     }
+    
+    public static final String OTA_PATH_RECOVERY_PROP = "otaupdater.sdcard.recovery";
 
     protected static void installFileDialog(final Context ctx, final File file) {
         Resources r = ctx.getResources();
@@ -233,8 +235,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             try {
-                                String path = file.getAbsolutePath();
-                                if (path.startsWith("/mnt")) path = path.substring(4);
+                                String name = file.getName();
 
                                 Process p = Runtime.getRuntime().exec("su");
                                 DataOutputStream os = new DataOutputStream(p.getOutputStream());
@@ -251,7 +252,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                                 if (selectedOpts[1]) {
                                     os.writeBytes("echo '--wipe_cache' >> /cache/recovery/command\n");
                                 }
-                                os.writeBytes("echo '--update_package=" + path + "' >> /cache/recovery/command\n");
+                                os.writeBytes("echo '--update_package=/" + OTA_PATH_RECOVERY_PROP + "/OTA-Updater/download/ " + name + "' >> /cache/recovery/command\n");
                                 os.writeBytes("reboot recovery\n");
                                 os.writeBytes("exit\n");
                                 os.flush();
