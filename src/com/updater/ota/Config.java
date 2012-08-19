@@ -21,7 +21,6 @@ import java.io.File;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.Environment;
 
 public class Config {
     public static final String GCM_SENDER_ID = "1068482628480";
@@ -31,10 +30,11 @@ public class Config {
     public static final String OTA_VER_PROP = "otaupdater.otaver";
     public static final String OTA_DATE_PROP = "otaupdater.otatime";
     public static final String OTA_PATH_OS_PROP = "otaupdater.sdcard.os";
+    public static final String OTA_PATH_RECOVERY_PROP = "otaupdater.sdcard.recovery";
 
     public static final int WAKE_TIMEOUT = 30000;
 
-    public static final String DL_PATH = "/" + OTA_PATH_OS_PROP + "/OTA-Updater/download/";
+    public static final String DL_PATH = "/" + Utils.getOSProp() + "/OTA-Updater/download/";
     public static final File DL_PATH_FILE = new File(Config.DL_PATH);
     static {
         DL_PATH_FILE.mkdirs();

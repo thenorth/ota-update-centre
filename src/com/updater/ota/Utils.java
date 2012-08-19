@@ -38,6 +38,8 @@ public class Utils {
     private static String cachedRomID = null;
     private static Date cachedOtaDate = null;
     private static String cachedOtaVer = null;
+    private static String cachedOSProp = null;
+    private static String cachedReProp = null;
 
     public static boolean marketAvailable(Context ctx) {
         PackageManager pm = ctx.getPackageManager();
@@ -60,7 +62,21 @@ public class Utils {
         }
         return cachedRomID;
     }
+    
+    public static String getOSProp() {
+        if (cachedOSProp == null) {
+            cachedOSProp = getprop(Config.OTA_PATH_OS_PROP);
+        }
+        return cachedOSProp;
+    }
 
+    public static String getReProp() {
+    	if (cachedReProp == null) {
+    		cachedReProp = getprop(Config.OTA_PATH_RECOVERY_PROP);
+    	}
+    	return cachedReProp;
+    }
+    
     public static Date getOtaDate() {
         if (cachedOtaDate == null) {
             String otaDateStr = getprop(Config.OTA_DATE_PROP);
