@@ -35,10 +35,6 @@ public class Config {
     public static final int WAKE_TIMEOUT = 30000;
 
     public static final String DL_PATH = "/" + Utils.getOSProp() + "/OTA-Updater/download/";
-
-    public static final int WAKE_TIMEOUT = 30000;
-
-    public static final String DL_PATH = "/" + OTA_PATH_OS_PROP + "/OTA-Updater/download/";
     public static final File DL_PATH_FILE = new File(Config.DL_PATH);
     
     static {
