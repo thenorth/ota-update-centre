@@ -4,6 +4,7 @@ OTAUPDATECENTER TEAM
 JieeHD
 M3ntion
 Vetruvet
+T-Junk
 
 
 APP DEVELOPMENT
@@ -29,3 +30,5 @@ corcoran
 Mushishi
 ganesh007
 cypis
+blk_jack
+NilsP
