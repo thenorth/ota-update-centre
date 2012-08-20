@@ -287,6 +287,10 @@ public class OTAUpdaterActivity extends PreferenceActivity {
         case R.id.refresh:
             checkForRomUpdates();
             break;
+        case R.id.settings:
+        	i = new Intent(this, UpdaterSettings.class);
+        	startActivity(i);
+        	break;
         }
         return true;
     }
