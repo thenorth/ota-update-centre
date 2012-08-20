@@ -96,13 +96,23 @@ public class OTAUpdaterActivity extends PreferenceActivity {
             alert.setTitle(R.string.alert_unsupported_title);
             alert.setMessage(R.string.alert_unsupported_message);
             alert.setCancelable(false);
-            alert.setPositiveButton(R.string.alert_exit, new DialogInterface.OnClickListener() {
+            alert.setNegativeButton(R.string.alert_exit, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                     finish();
                 }
             });
+            
+            //Allow the user to bypass the prompt which takes them out of the app. Let's them get a feel of the application.
+            alert.setPositiveButton(R.string.alert_ignore, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					dialog.dismiss();
+				}
+			});
             alert.create().show();
 
             if (Utils.marketAvailable(this)) {
