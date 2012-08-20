@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <Preference
+        android:id="@+id/device_settings"
+        android:title="@string/device_settings" />
+    
+    <Preference
+        android:id="@+id/update_settings"
+        android:title="@string/update_settings" />
+
+</PreferenceScreen>

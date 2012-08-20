@@ -78,6 +78,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
 
     private boolean dialogFromNotif = false;
     private boolean checkOnResume = false;
+    private boolean supported = true;
     private Config cfg;
 
     private boolean fetching = false;
@@ -92,6 +93,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
         cfg = Config.getInstance(getApplicationContext());
 
         if (!Utils.isROMSupported()) {
+        	supported = false;
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle(R.string.alert_unsupported_title);
             alert.setMessage(R.string.alert_unsupported_message);
@@ -153,6 +155,8 @@ public class OTAUpdaterActivity extends PreferenceActivity {
             Date romDate = Utils.getOtaDate();
             if (romDate != null) {
                 romVersion += " (" + DateFormat.getDateTimeInstance().format(romDate) + ")";
+            } else {
+            	romVersion = "Unknown";
             }
 
             final Preference device = findPreference("device_view");
@@ -162,9 +166,17 @@ public class OTAUpdaterActivity extends PreferenceActivity {
             final Preference version = findPreference("version_view");
             version.setSummary(romVersion);
             final Preference build = findPreference("otaid_view");
-            build.setSummary(Utils.getRomID());
+            if(supported == true) {
+            	build.setSummary(Utils.getRomID());
+            } else {
+            	build.setSummary("Unknown");
+            }
 
             availUpdatePref = findPreference("avail_updates");
+            
+            if (supported == false) {
+            	availUpdatePref.setSelectable(false);
+            }
 
             Intent i = getIntent();
             if (i.getAction().equals(NOTIF_ACTION)) {
