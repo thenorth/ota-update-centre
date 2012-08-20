@@ -11,6 +11,10 @@
         <Preference
             android:title="@string/about_version_title"
             android:key="about_version" />
+        
+        <Preference 
+            android:title="@string/contributors_title"
+            android:key="team_pref"/>
 
     </PreferenceCategory>
 

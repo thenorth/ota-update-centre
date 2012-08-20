@@ -16,18 +16,25 @@
 
 package com.updater.ota;
 
+import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.preference.Preference;
+import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
 
 public class UpdaterAbout extends PreferenceActivity {
     private Preference versionPref;
+    private Preference team;
+    
 
     @Override
     @SuppressWarnings("deprecation")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        
+        
         addPreferencesFromResource(R.xml.about);
 
         versionPref = findPreference("about_version");
@@ -36,5 +43,19 @@ public class UpdaterAbout extends PreferenceActivity {
         } catch (NameNotFoundException e) {
             versionPref.setSummary(R.string.about_version_unknown);
         }
+        
+        team = findPreference("team_pref");
+        team.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+
+			@Override
+			public boolean onPreferenceClick(Preference preference) {
+				// TODO Auto-generated method stub
+				Intent i = new Intent(UpdaterAbout.this, Contributors.class);
+	            startActivity(i);
+				return false;
+			}
+        	
+        });
+
     }
 }
