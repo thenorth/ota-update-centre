@@ -252,7 +252,11 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                                 if (selectedOpts[1]) {
                                     os.writeBytes("echo '--wipe_cache' >> /cache/recovery/command\n");
                                 }
+<<<<<<< HEAD
                                 os.writeBytes("echo '--update_package=/" + OTA_PATH_RECOVERY_PROP + "/OTA-Updater/download/ " + name + "' >> /cache/recovery/command\n");
+=======
+                                os.writeBytes("echo '--update_package=/" + Utils.getReProp() + "/OTA-Updater/download/" + name + "' >> /cache/recovery/command\n");
+>>>>>>> 7cc1ad1... Forgot a space and is getting Utils.java ready to have the fallback...
                                 os.writeBytes("reboot recovery\n");
                                 os.writeBytes("exit\n");
                                 os.flush();
