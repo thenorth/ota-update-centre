@@ -32,7 +32,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Environment;
 
 public class Utils {
     private static String cachedRomID = null;
@@ -66,6 +65,8 @@ public class Utils {
     public static String getOSProp() {
         if (cachedOSProp == null) {
             cachedOSProp = getprop(Config.OTA_PATH_OS_PROP);
+        } else {
+        	cachedOSProp = "sdcard";
         }
         return cachedOSProp;
     }
@@ -73,6 +74,8 @@ public class Utils {
     public static String getReProp() {
     	if (cachedReProp == null) {
     		cachedReProp = getprop(Config.OTA_PATH_RECOVERY_PROP);
+    	} else {
+    		cachedReProp = "sdcard";
     	}
     	return cachedReProp;
     }
