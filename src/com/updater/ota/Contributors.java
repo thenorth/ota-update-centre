@@ -45,7 +45,7 @@ public class Contributors extends Activity {
                 data.append(tmp, 0, numRead);
             }
         } catch (IOException e) {
-        	Log.e("CONTRIBUTORS", "IOEXCEPTION:");
+        	Log.e("OTA::Contrib", "IOException reading contributor list");
             showErrorAndFinish();
             return;
         } finally {

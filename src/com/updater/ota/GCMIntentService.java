@@ -43,7 +43,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 
     @Override
     protected void onError(Context ctx, String errorID) {
-        Log.e("OTAUpdater::GCM", errorID);
+        Log.e("OTA::GCMError", errorID);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 
     @Override
     protected void onRegistered(Context ctx, String regID) {
-        Log.v("OTAUpdater::GCMRegister", "GCM registered - ID=" + regID);
+        Log.v("OTA::GCMRegister", "GCM registered - ID=" + regID);
         ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
         params.add(new BasicNameValuePair("do", "register"));
         params.add(new BasicNameValuePair("reg_id", regID));
@@ -109,14 +109,14 @@ public class GCMIntentService extends GCMBaseIntentService {
                     if (cfg.getShowNotif()) {
                     	Utils.showUpdateNotif(getApplicationContext(), info);
                     } else {
-                        Log.d("GCMINTENTSERVICE", "NOTIFICATION NOT SHOWN");
+                        Log.v("OTA::GCMRegister", "got update response, notif not shown");
                     }
                 } else {
                     cfg.clearStoredUpdate();
                 }
             } else {
                 if (e != null) e.consumeContent();
-                Log.w("OTA::GCMRegistr", "registration response " + status);
+                Log.w("OTA::GCMRegister", "registration response " + status);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -125,7 +125,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 
     @Override
     protected void onUnregistered(Context ctx, String regID) {
-        Log.v("OTAUpdater::GCMRegister", "GCM unregistered - ID=" + regID);
+        Log.v("OTA::GCMRegister", "GCM unregistered - ID=" + regID);
         ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
         params.add(new BasicNameValuePair("do", "unregister"));
         params.add(new BasicNameValuePair("reg_id", regID));
@@ -136,7 +136,7 @@ public class GCMIntentService extends GCMBaseIntentService {
             req.setEntity(new UrlEncodedFormEntity(params));
             HttpResponse resp = http.execute(req);
             if (resp.getStatusLine().getStatusCode() != 200) {
-                Log.w("OTA::GCM", "unregistration response non-200");
+                Log.w("OTA::GCMRegister", "unregistration response non-200");
             }
         } catch (Exception e) {
             e.printStackTrace();

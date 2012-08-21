@@ -130,17 +130,17 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                 final String regId = GCMRegistrar.getRegistrationId(getApplicationContext());
                 if (regId.length() != 0) {
                     if (cfg.upToDate()) {
-                        Log.v("OTAUpdater::GCMRegister", "Already registered");
+                        Log.v("OTA::GCMRegister", "Already registered");
                     } else {
-                        Log.v("OTAUpdater::GCMRegister", "Already registered, out-of-date, reregistering");
+                        Log.v("OTA::GCMRegister", "Already registered, out-of-date, reregistering");
                         GCMRegistrar.unregister(getApplicationContext());
                         GCMRegistrar.register(getApplicationContext(), Config.GCM_SENDER_ID);
                         cfg.setValuesToCurrent();
-                        Log.v("OTAUpdater::GCMRegister", "GCM registered");
+                        Log.v("OTA::GCMRegister", "GCM registered");
                     }
                 } else {
                     GCMRegistrar.register(getApplicationContext(), Config.GCM_SENDER_ID);
-                    Log.v("OTAUpdater::GCMRegister", "GCM registered");
+                    Log.v("OTA::GCMRegister", "GCM registered");
                 }
             } else {
                 UpdateCheckReceiver.setAlarm(getApplicationContext());
@@ -328,7 +328,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
 
                 final File file = new File(Config.DL_PATH + slugifiedFileName + ".zip");
                 if (file.exists()) {
-                    Log.v("OTAUpdater::Download", "Found old zip, checking md5");
+                    Log.v("OTA::Download", "Found old zip, checking md5");
 
                     InputStream is = null;
                     try {
@@ -340,7 +340,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                             digest.update(data, 0, nRead);
                         }
                         String oldMd5 = Utils.byteArrToStr(digest.digest());
-                        Log.v("OTAUpdater::Download", "old zip md5: " + oldMd5);
+                        Log.v("OTA::Download", "old zip md5: " + oldMd5);
                         if (!info.md5.equalsIgnoreCase(oldMd5)) {
                             file.delete();
                         } else {
@@ -383,8 +383,8 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                         OutputStream os = null;
                         try {
                             URL getUrl = new URL(info.url);
-                            Log.v("OTAUpdater::Download", "downloading from: " + getUrl);
-                            Log.d("OTAUpdater::Download", "downloading to: " + file.getAbsolutePath());
+                            Log.v("OTA::Download", "downloading from: " + getUrl);
+                            Log.d("OTA::Download", "downloading to: " + file.getAbsolutePath());
 
                             URLConnection conn = getUrl.openConnection();
                             final int lengthOfFile = conn.getContentLength();
@@ -414,9 +414,9 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                             }
 
                             String dlMd5 = Utils.byteArrToStr(digest.digest());
-                            Log.v("OTAUpdater::Download", "downloaded md5: " + dlMd5);
+                            Log.v("OTA::Download", "downloaded md5: " + dlMd5);
                             if (!info.md5.equalsIgnoreCase(dlMd5)) {
-                                Log.w("OTAUpdater::Download", "downloaded md5 doesn't match " + info.md5);
+                                Log.w("OTA::Download", "downloaded md5 doesn't match " + info.md5);
                                 file.delete();
                                 return 1;
                             }
