@@ -397,13 +397,13 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                             is = new BufferedInputStream(getUrl.openStream());
                             os = new FileOutputStream(file);
 
-                            byte[] data = new byte[4096];
+                            byte[] buf = new byte[4096];
                             int nRead = -1;
                             int totalRead = 0;
-                            while ((nRead = is.read(data)) != -1) {
+                            while ((nRead = is.read(buf)) != -1) {
                                 if (this.isCancelled()) break;
-                                os.write(data, 0, nRead);
-                                digest.update(data, 0, nRead);
+                                os.write(buf, 0, nRead);
+                                digest.update(buf, 0, nRead);
                                 totalRead += nRead;
                                 publishProgress(totalRead);
                             }

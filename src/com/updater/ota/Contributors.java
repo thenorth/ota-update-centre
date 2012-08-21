@@ -34,26 +34,24 @@ public class Contributors extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        BufferedReader inputReader = null;
+        BufferedReader in = null;
         StringBuilder data = null;
         try {
             data = new StringBuilder(2048);
-            char tmp[] = new char[2048];
-            int numRead;
-            inputReader = new BufferedReader(new InputStreamReader(getAssets().open("team.txt")));
-            while ((numRead = inputReader.read(tmp)) >= 0) {
-                data.append(tmp, 0, numRead);
+            char[] buf = new char[2048];
+            int nRead = -1;
+            in = new BufferedReader(new InputStreamReader(getAssets().open("team.txt")));
+            while ((nRead = in.read(buf)) != -1) {
+                data.append(buf, 0, nRead);
             }
         } catch (IOException e) {
         	Log.e("OTA::Contrib", "IOException reading contributor list");
             showErrorAndFinish();
             return;
         } finally {
-            try {
-                if (inputReader != null) {
-                    inputReader.close();
-                }
-            } catch (IOException e) {
+            if (in != null) {
+                try { in.close(); }
+                catch (IOException e) {}
             }
         }
 
@@ -76,8 +74,7 @@ public class Contributors extends Activity {
     }
 
     private void showErrorAndFinish() {
-        Toast.makeText(this, R.string.contributors_error, Toast.LENGTH_LONG)
-                .show();
+        Toast.makeText(this, R.string.contributors_error, Toast.LENGTH_LONG).show();
         finish();
     }
 }
