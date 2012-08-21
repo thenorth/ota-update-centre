@@ -33,13 +33,14 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+
 public class Utils {
     private static String cachedRomID = null;
     private static Date cachedOtaDate = null;
     private static String cachedOtaVer = null;
     private static String cachedOSProp = null;
     private static String cachedReProp = null;
-
+    
     public static boolean marketAvailable(Context ctx) {
         PackageManager pm = ctx.getPackageManager();
         try {
@@ -64,18 +65,18 @@ public class Utils {
     
     public static String getOSProp() {
         if (cachedOSProp == null) {
-            cachedOSProp = getprop(Config.OTA_PATH_OS_PROP);
-        } else {
-        	cachedOSProp = "sdcard";
+            String OSPropStr = getprop(Config.OTA_PATH_OS_PROP);
+            if (OSPropStr != null) return getprop(Config.OTA_PATH_OS_PROP);
+            if (OSPropStr == null) return "sdcard";
         }
         return cachedOSProp;
     }
 
     public static String getReProp() {
     	if (cachedReProp == null) {
-    		cachedReProp = getprop(Config.OTA_PATH_RECOVERY_PROP);
-    	} else {
-    		cachedReProp = "sdcard";
+    		String RePropStr = getprop(Config.OTA_PATH_RECOVERY_PROP);
+    		if (RePropStr != null) return getprop(Config.OTA_PATH_RECOVERY_PROP);
+    		if (RePropStr == null) return "sdcard";
     	}
     	return cachedReProp;
     }
