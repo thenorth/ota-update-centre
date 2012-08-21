@@ -41,6 +41,8 @@ public class Config {
         DL_PATH_FILE.mkdirs();
     }
 
+    private boolean showNotif = false;
+    
     private int lastVersion = -1;
     private String lastDevice = null;
     private String lastRomID = null;
@@ -57,6 +59,8 @@ public class Config {
     private Config(Context ctx) {
         PREFS = ctx.getApplicationContext().getSharedPreferences(PREFS_NAME, 0);
 
+        showNotif = PREFS.getBoolean("showNotif", showNotif);
+        
         lastVersion = PREFS.getInt("version", lastVersion);
         lastDevice = PREFS.getString("device", lastDevice);
         lastRomID = PREFS.getString("romid", lastRomID);
@@ -81,6 +85,19 @@ public class Config {
     public static synchronized Config getInstance(Context ctx) {
         if (instance == null) instance = new Config(ctx);
         return instance;
+    }
+    
+    public boolean getShowNotif() {
+        return showNotif;
+    }
+    
+    public void setShowNotif(boolean showNotif) {
+        this.showNotif = showNotif;
+        synchronized (PREFS) {
+            SharedPreferences.Editor editor = PREFS.edit();
+            editor.putBoolean("showNotif", showNotif);
+            editor.commit();
+        }
     }
 
     public int getLastVersion() {

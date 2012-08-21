@@ -30,7 +30,6 @@ import org.json.JSONObject;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
@@ -38,9 +37,6 @@ import com.google.android.gcm.GCMBaseIntentService;
 
 public class GCMIntentService extends GCMBaseIntentService {
 		
-	private String SHOW_NOTIF_KEY = "show_notifications";
-	private SharedPreferences prefs;
-
     public GCMIntentService() {
         super(Config.GCM_SENDER_ID);
     }
@@ -107,17 +103,16 @@ public class GCMIntentService extends GCMBaseIntentService {
                         json.getString("md5"),
                         Utils.parseDate(json.getString("date")));
 
+                final Config cfg = Config.getInstance(getApplicationContext());
                 if (Utils.isUpdate(info)) {
-                    Config.getInstance(getApplicationContext()).storeUpdate(info);
-                    prefs = UpdaterSettings.prefs;
-                    boolean enabled = prefs.getBoolean(SHOW_NOTIF_KEY, true);
-                    if (enabled == true) {
+                    cfg.storeUpdate(info);
+                    if (cfg.getShowNotif()) {
                     	Utils.showUpdateNotif(getApplicationContext(), info);
                     } else {
-                    	Log.d("GCMINTENTSERVICE", "NOTIFICATION NOT SHOWN");
+                        Log.d("GCMINTENTSERVICE", "NOTIFICATION NOT SHOWN");
                     }
                 } else {
-                    Config.getInstance(getApplicationContext()).clearStoredUpdate();
+                    cfg.clearStoredUpdate();
                 }
             } else {
                 if (e != null) e.consumeContent();
