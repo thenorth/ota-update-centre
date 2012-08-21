@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.updater.ota"
     android:versionCode="6"
-    android:versionName="0.99-RC6">
+    android:versionName="0.99-RC7">
 
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="16" />
 
