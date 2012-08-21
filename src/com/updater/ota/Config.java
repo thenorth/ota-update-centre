@@ -41,7 +41,7 @@ public class Config {
         DL_PATH_FILE.mkdirs();
     }
 
-    private boolean showNotif = false;
+    private boolean showNotif = true;
     
     private int lastVersion = -1;
     private String lastDevice = null;
