@@ -65,18 +65,16 @@ public class Utils {
     
     public static String getOSProp() {
         if (cachedOSProp == null) {
-            String OSPropStr = getprop(Config.OTA_PATH_OS_PROP);
-            if (OSPropStr != null) return getprop(Config.OTA_PATH_OS_PROP);
-            if (OSPropStr == null) return "sdcard";
+            cachedOSProp = getprop(Config.OTA_PATH_OS_PROP);
+            if (cachedOSProp == null) return "sdcard";
         }
         return cachedOSProp;
     }
 
     public static String getReProp() {
     	if (cachedReProp == null) {
-    		String RePropStr = getprop(Config.OTA_PATH_RECOVERY_PROP);
-    		if (RePropStr != null) return getprop(Config.OTA_PATH_RECOVERY_PROP);
-    		if (RePropStr == null) return "sdcard";
+    		cachedReProp = getprop(Config.OTA_PATH_RECOVERY_PROP);
+    		if (cachedReProp == null) return "sdcard";
     	}
     	return cachedReProp;
     }
