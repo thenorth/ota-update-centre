@@ -234,7 +234,6 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                             try {
                                 String name = file.getName();
                                 
-
                                 Process p = Runtime.getRuntime().exec("su");
                                 DataOutputStream os = new DataOutputStream(p.getOutputStream());
                                 os.writeBytes("rm -f /cache/recovery/command\n");
@@ -251,7 +250,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                                     os.writeBytes("echo '--wipe_cache' >> /cache/recovery/command\n");
                                 }
                                 
-                                os.writeBytes("echo '--update_package=/" + Utils.getReProp() + "/OTA-Updater/download/" + name + "' >> /cache/recovery/command\n");
+                                os.writeBytes("echo '--update_package=/" + Utils.getRcvrySdPath() + "/OTA-Updater/download/" + name + "' >> /cache/recovery/command\n");
                                 
                                 if (!android.os.Build.DEVICE.toLowerCase().equals("gt-i9100")) {
                                     os.writeBytes("reboot recovery\n");

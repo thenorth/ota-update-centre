@@ -38,8 +38,8 @@ public class Utils {
     private static String cachedRomID = null;
     private static Date cachedOtaDate = null;
     private static String cachedOtaVer = null;
-    private static String cachedOSProp = null;
-    private static String cachedReProp = null;
+    private static String cachedOSSdPath = null;
+    private static String cachedRcvrySdPath = null;
     
     public static boolean marketAvailable(Context ctx) {
         PackageManager pm = ctx.getPackageManager();
@@ -63,20 +63,20 @@ public class Utils {
         return cachedRomID;
     }
     
-    public static String getOSProp() {
-        if (cachedOSProp == null) {
-            cachedOSProp = getprop(Config.OTA_PATH_OS_PROP);
-            if (cachedOSProp == null) return "sdcard";
+    public static String getOSSdPath() {
+        if (cachedOSSdPath == null) {
+            cachedOSSdPath = getprop(Config.OTA_SD_PATH_OS_PROP);
+            if (cachedOSSdPath == null) return "sdcard";
         }
-        return cachedOSProp;
+        return cachedOSSdPath;
     }
 
-    public static String getReProp() {
-    	if (cachedReProp == null) {
-    		cachedReProp = getprop(Config.OTA_PATH_RECOVERY_PROP);
-    		if (cachedReProp == null) return "sdcard";
+    public static String getRcvrySdPath() {
+    	if (cachedRcvrySdPath == null) {
+    		cachedRcvrySdPath = getprop(Config.OTA_SD_PATH_RECOVERY_PROP);
+    		if (cachedRcvrySdPath == null) return "sdcard";
     	}
-    	return cachedReProp;
+    	return cachedRcvrySdPath;
     }
     
     public static Date getOtaDate() {
