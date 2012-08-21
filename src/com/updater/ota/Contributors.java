@@ -17,7 +17,6 @@
 package com.updater.ota;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -30,7 +29,6 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 public class Contributors extends Activity {
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,5 +80,4 @@ public class Contributors extends Activity {
                 .show();
         finish();
     }
-
 }
