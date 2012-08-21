@@ -36,8 +36,12 @@ public class UpdateCheckReceiver extends BroadcastReceiver {
         if (cfg.hasStoredUpdate()) {
             RomInfo info = cfg.getStoredUpdate();
             if (Utils.isUpdate(info)) {
-                Log.v("OTA::Receiver", "Found stored update");
-                Utils.showUpdateNotif(context, info);
+                if (cfg.getShowNotif()) {
+                    Utils.showUpdateNotif(context, info);
+                    Log.v("OTA::Receiver", "Found stored update");
+                } else {
+                    Log.v("OTA::Receiver", "Found stored update, notif not shown");
+                }
             } else {
                 Log.v("OTA::Receiver", "Found invalid stored update");
                 cfg.clearStoredUpdate();
@@ -83,7 +87,11 @@ public class UpdateCheckReceiver extends BroadcastReceiver {
                     public void onLoaded(RomInfo info) {
                         if (Utils.isUpdate(info)) {
                             cfg.storeUpdate(info);
-                            Utils.showUpdateNotif(context, info);
+                            if (cfg.getShowNotif()) {
+                                Utils.showUpdateNotif(context, info);
+                            } else {
+                                Log.v("OTA::Receiver", "found update, notif not shown");
+                            }
                         } else {
                             cfg.clearStoredUpdate();
                         }

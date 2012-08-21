@@ -48,15 +48,22 @@ public class GCMIntentService extends GCMBaseIntentService {
 
     @Override
     protected void onMessage(Context ctx, Intent payload) {
+        final Config cfg = Config.getInstance(getApplicationContext());
         RomInfo info = RomInfo.fromIntent(payload);
 
         if (!Utils.isUpdate(info)) {
-            Config.getInstance(getApplicationContext()).clearStoredUpdate();
+            Log.v("OTA::GCM", "got GCM message, not update");
+            cfg.clearStoredUpdate();
             return;
         }
 
-        Config.getInstance(getApplicationContext()).storeUpdate(info);
-        Utils.showUpdateNotif(ctx, info);
+        cfg.storeUpdate(info);
+        if (cfg.getShowNotif()) {
+            Log.v("OTA::GCM", "got GCM message");
+            Utils.showUpdateNotif(ctx, info);
+        } else {
+            Log.v("OTA::GCM", "got GCM message, notif not shown");
+        }
     }
 
     @Override
