@@ -216,7 +216,6 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
             });
         } else {
             alert.setMultiChoiceItems(installOpts, selectedOpts, new DialogInterface.OnMultiChoiceClickListener() {
-                @Override
                 public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                     selectedOpts[which] = isChecked;
                 }
@@ -251,12 +250,21 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                                 if (selectedOpts[1]) {
                                     os.writeBytes("echo '--wipe_cache' >> /cache/recovery/command\n");
                                 }
+                                if (android.os.Build.DEVICE.toLowerCase().equals("gt-i9100")) {
                                 os.writeBytes("echo '--update_package=/" + Utils.getReProp() + "/OTA-Updater/download/" + name + "' >> /cache/recovery/command\n");
+                                    os.writeBytes("exit\n");
+                                    os.flush();
+                                    p.waitFor();
+                                    ((PowerManager) ctx.getSystemService(POWER_SERVICE)).reboot("recovery");
+                            } else {
+                            	os.writeBytes("echo '--update_package=/" + Utils.getReProp() + "/OTA-Updater/download/" + name + "' >> /cache/recovery/command\n");
                                 os.writeBytes("reboot recovery\n");
                                 os.writeBytes("exit\n");
                                 os.flush();
                                 p.waitFor();
                                 ((PowerManager) ctx.getSystemService(POWER_SERVICE)).reboot("recovery");
+                            }
+                                
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
