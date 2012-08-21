@@ -11,7 +11,7 @@ import android.preference.PreferenceActivity;
 public class UpdaterSettings extends PreferenceActivity {
 	
 	private CheckBoxPreference show_notif;
-	private SharedPreferences prefs;
+	public static SharedPreferences prefs;
 	private String SHOW_NOTIF_KEY = "show_notifications";
 	private SharedPreferences.Editor editor;
 	
@@ -20,10 +20,10 @@ public class UpdaterSettings extends PreferenceActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.settings_main);
+		prefs = getPreferences(MODE_PRIVATE);
 		
 		show_notif = (CheckBoxPreference) findPreference("show_notif");
 		
-		prefs = getPreferences(MODE_PRIVATE);
 		editor = prefs.edit();
 		
 		prefs.getBoolean(SHOW_NOTIF_KEY, true);
