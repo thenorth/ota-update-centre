@@ -265,6 +265,10 @@ public class OTAUpdaterActivity extends PreferenceActivity {
             i = new Intent(this, ListFilesActivity.class);
             startActivity(i);
             break;
+        case R.id.settings:
+        	i = new Intent(this, UpdaterSettings.class);
+        	startActivity(i);
+        	break;
         case R.id.about:
             i = new Intent(this, UpdaterAbout.class);
             startActivity(i);
