@@ -91,7 +91,9 @@ public class Utils {
     public static String getOSSdPath() {
         if (cachedOSSdPath == null) {
             cachedOSSdPath = getprop(Config.OTA_SD_PATH_OS_PROP);
-            if (cachedOSSdPath == null) return "sdcard";
+            if (cachedOSSdPath == null) {
+            	cachedOSSdPath = "sdcard";
+            }
         }
         return cachedOSSdPath;
     }
@@ -99,7 +101,9 @@ public class Utils {
     public static String getRcvrySdPath() {
     	if (cachedRcvrySdPath == null) {
     		cachedRcvrySdPath = getprop(Config.OTA_SD_PATH_RECOVERY_PROP);
-    		if (cachedRcvrySdPath == null) return "sdcard";
+    		if (cachedRcvrySdPath == null) {
+    			cachedRcvrySdPath = "sdcard";
+    		}
     	}
     	return cachedRcvrySdPath;
     }
