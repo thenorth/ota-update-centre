@@ -16,12 +16,10 @@
 
 package com.updater.ota;
 
-import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
 
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -32,7 +30,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-
 
 public class Utils {
     private static String cachedRomID = null;
@@ -125,28 +122,17 @@ public class Utils {
     }
 
     private static String getprop(String name) {
-        ProcessBuilder pb = new ProcessBuilder("/system/bin/getprop", name);
-        pb.redirectErrorStream(true);
-
-        Process p = null;
-        InputStream is = null;
-        try {
-            p = pb.start();
-            is = p.getInputStream();
-            String prop = new Scanner(is).next();
-            if (prop.length() == 0) return null;
-            return prop;
-        } catch (NoSuchElementException e) {
-            return null;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (is != null) {
-                try { is.close(); }
-                catch (Exception e) { }
-            }
-        }
-        return null;
+    	String returnValue = null;
+		try {
+			Class<?> c = Class.forName("android.os.SystemProperties");
+			Method get = c.getMethod("get", String.class, String.class);
+			returnValue = (String) get.invoke(c, name, "");
+			if (returnValue.equals("")) {
+				returnValue = null;
+			}
+		} catch (Exception e) {
+		}
+		return returnValue;
     }
 
     public static boolean dataAvailable(Context ctx) {
