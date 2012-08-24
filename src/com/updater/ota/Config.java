@@ -29,6 +29,7 @@ public class Config {
     public static final String OTA_ID_PROP = "otaupdater.otaid";
     public static final String OTA_VER_PROP = "otaupdater.otaver";
     public static final String OTA_DATE_PROP = "otaupdater.otatime";
+    public static final String OTA_DEVICE_MULTI = "otaupdater.device.multi";
     public static final String OTA_SD_PATH_OS_PROP = "otaupdater.sdcard.os";
     public static final String OTA_SD_PATH_RECOVERY_PROP = "otaupdater.sdcard.recovery";
 
@@ -78,7 +79,7 @@ public class Config {
             curVersion = ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0).versionCode;
         } catch (NameNotFoundException e) {
         }
-        curDevice = android.os.Build.DEVICE.toLowerCase();
+        curDevice = Utils.getDeviceRom();
         curRomID = Utils.getRomID();
     }
     private static Config instance = null;
