@@ -38,9 +38,11 @@ public class Utils {
     private static String cachedRomID = null;
     private static Date cachedOtaDate = null;
     private static String cachedOtaVer = null;
+    private static Boolean cachedOtaDeviceMulti = null;
     private static String cachedOSSdPath = null;
     private static String cachedRcvrySdPath = null;
-    
+    private static String cachedDevice = null;
+
     public static boolean marketAvailable(Context ctx) {
         PackageManager pm = ctx.getPackageManager();
         try {
@@ -63,10 +65,35 @@ public class Utils {
         return cachedRomID;
     }
     
+    public static String getDevice() {
+        if (cachedDevice == null) {
+        	cachedDevice = android.os.Build.DEVICE.toLowerCase();
+        }
+        return cachedDevice;
+    }
+
+    public static String getDeviceRom() {
+    	if (cachedOtaDeviceMulti == null) {
+    		String propOtaDeviceMulti = getprop(Config.OTA_DEVICE_MULTI);
+    		if (propOtaDeviceMulti != null && propOtaDeviceMulti.equals("1")) {
+    			cachedOtaDeviceMulti = true;
+    		} else {
+    			cachedOtaDeviceMulti = false;
+    		}
+    	}
+    	if (cachedOtaDeviceMulti) {
+    		return "multi";
+    	} else {
+    		return getDevice();
+    	}
+    }
+
     public static String getOSSdPath() {
         if (cachedOSSdPath == null) {
             cachedOSSdPath = getprop(Config.OTA_SD_PATH_OS_PROP);
-            if (cachedOSSdPath == null) return "sdcard";
+            if (cachedOSSdPath == null) {
+            	cachedOSSdPath = "sdcard";
+            }
         }
         return cachedOSSdPath;
     }
@@ -74,7 +101,9 @@ public class Utils {
     public static String getRcvrySdPath() {
     	if (cachedRcvrySdPath == null) {
     		cachedRcvrySdPath = getprop(Config.OTA_SD_PATH_RECOVERY_PROP);
-    		if (cachedRcvrySdPath == null) return "sdcard";
+    		if (cachedRcvrySdPath == null) {
+    			cachedRcvrySdPath = "sdcard";
+    		}
     	}
     	return cachedRcvrySdPath;
     }
