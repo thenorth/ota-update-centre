@@ -72,7 +72,7 @@ public class GCMIntentService extends GCMBaseIntentService {
         ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
         params.add(new BasicNameValuePair("do", "register"));
         params.add(new BasicNameValuePair("reg_id", regID));
-        params.add(new BasicNameValuePair("device", Utils.getDeviceRom()));
+        params.add(new BasicNameValuePair("device", android.os.Build.DEVICE.toLowerCase()));
         params.add(new BasicNameValuePair("rom_id", Utils.getRomID()));
         params.add(new BasicNameValuePair("device_id", ((TelephonyManager) getSystemService(TELEPHONY_SERVICE)).getDeviceId()));
 

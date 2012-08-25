@@ -64,7 +64,7 @@ public class FetchRomInfoTask extends AsyncTask<Void, Void, RomInfo> {
 
         try {
             ArrayList<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
-            params.add(new BasicNameValuePair("device", Utils.getDeviceRom()));
+            params.add(new BasicNameValuePair("device", android.os.Build.DEVICE.toLowerCase()));
             params.add(new BasicNameValuePair("rom", Utils.getRomID()));
 
             HttpClient client = new DefaultHttpClient();

@@ -206,7 +206,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
         AlertDialog.Builder alert = new AlertDialog.Builder(ctx);
         alert.setTitle(R.string.alert_install_title);
 //        alert.setMessage(R.string.alert_install_message);
-        if (Utils.getDevice().equals("gt-n7000")) { //can't flash programmatically, must flash manually
+        if (android.os.Build.DEVICE.toLowerCase().equals("gt-n7000")) { //can't flash programmatically, must flash manually
             alert.setMessage(ctx.getString(R.string.alert_noinstall_message, file.getAbsolutePath()));
             alert.setNeutralButton(R.string.alert_ok, new DialogInterface.OnClickListener() {
                 @Override
@@ -252,7 +252,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                                 
                                 os.writeBytes("echo '--update_package=/" + Utils.getRcvrySdPath() + "/OTA-Updater/download/" + name + "' >> /cache/recovery/command\n");
                                 
-                                if (!Utils.getDevice().equals("gt-i9100")) {
+                                if (!android.os.Build.DEVICE.toLowerCase().equals("gt-i9100")) {
                                     os.writeBytes("reboot recovery\n");
                                 }
                                 
