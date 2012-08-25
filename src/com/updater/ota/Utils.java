@@ -16,10 +16,12 @@
 
 package com.updater.ota;
 
-import java.lang.reflect.Method;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 import android.annotation.TargetApi;
 import android.app.Notification;
@@ -99,17 +101,28 @@ public class Utils {
     }
 
     private static String getprop(String name) {
-    	String returnValue = null;
-		try {
-			Class<?> c = Class.forName("android.os.SystemProperties");
-			Method get = c.getMethod("get", String.class, String.class);
-			returnValue = (String) get.invoke(c, name, "");
-			if (returnValue.equals("")) {
-				returnValue = null;
-			}
-		} catch (Exception e) {
-		}
-		return returnValue;
+        ProcessBuilder pb = new ProcessBuilder("/system/bin/getprop", name);
+        pb.redirectErrorStream(true);
+
+        Process p = null;
+        InputStream is = null;
+        try {
+            p = pb.start();
+            is = p.getInputStream();
+            String prop = new Scanner(is).next();
+            if (prop.length() == 0) return null;
+            return prop;
+        } catch (NoSuchElementException e) {
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (is != null) {
+                try { is.close(); }
+                catch (Exception e) { }
+            }
+        }
+        return null;
     }
 
     public static boolean dataAvailable(Context ctx) {
