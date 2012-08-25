@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.PowerManager;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -58,6 +59,12 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        String extState = Environment.getExternalStorageState();
+        if (!extState.equals(Environment.MEDIA_MOUNTED) && !extState.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
+            Toast.makeText(this, extState.equals(Environment.MEDIA_SHARED) ? R.string.toast_nosd_shared : R.string.toast_nosd_error, Toast.LENGTH_LONG).show();
+            finish();
+        }
+        
         fileListAdapter = new ArrayAdapter<String>(this, R.layout.row, R.id.filename, fileList);
         setListAdapter(fileListAdapter);
         listFiles(Config.DL_PATH_FILE);
