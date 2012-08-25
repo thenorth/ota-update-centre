@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="file_actions">
+        <item>התקן</item>
+        <item>שנה שם</item>
+        <item>מחק</item>
+    </string-array>
+    <string-array name="install_options">
+        <item>מחיקת נתונים</item>
+        <item>מחיקת קאש</item>
+    </string-array>
+    <string-array name="file_ages">
+        <item>שבוע</item>
+        <item>שבועיים</item>
+        <item>חודש</item>
+        <item>3 חודשים</item>
+        <item>6 חודשים</item>
+        <item>שנה</item>
+    </string-array>
+</resources>
