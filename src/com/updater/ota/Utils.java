@@ -21,6 +21,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -30,6 +31,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 
 public class Utils {
     private static String cachedRomID = null;
@@ -142,6 +144,8 @@ public class Utils {
         return false;
     }
 
+    @TargetApi(11)
+    @SuppressWarnings("deprecation")
     public static void showUpdateNotif(Context ctx, RomInfo info) {
         Intent i = new Intent(ctx, OTAUpdaterActivity.class);
         i.setAction(OTAUpdaterActivity.NOTIF_ACTION);
@@ -150,14 +154,21 @@ public class Utils {
         NotificationManager nm = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);
         PendingIntent contentIntent = PendingIntent.getActivity(ctx, 0, i, PendingIntent.FLAG_CANCEL_CURRENT);
 
-        Notification.Builder builder = new Notification.Builder(ctx);
-        builder.setContentIntent(contentIntent);
-        builder.setContentTitle(ctx.getString(R.string.notif_source));
-        builder.setContentText(ctx.getString(R.string.notif_text_rom));
-        builder.setTicker(ctx.getString(R.string.notif_text_rom));
-        builder.setWhen(System.currentTimeMillis());
-        builder.setSmallIcon(R.drawable.updates);
-        nm.notify(1, builder.getNotification());
+        Notification notif = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            Notification.Builder builder = new Notification.Builder(ctx);
+            builder.setContentIntent(contentIntent);
+            builder.setContentTitle(ctx.getString(R.string.notif_source));
+            builder.setContentText(ctx.getString(R.string.notif_text_rom));
+            builder.setTicker(ctx.getString(R.string.notif_text_rom));
+            builder.setWhen(System.currentTimeMillis());
+            builder.setSmallIcon(R.drawable.updates);
+            notif = builder.getNotification();
+        } else {
+            notif = new Notification(R.drawable.updates, ctx.getString(R.string.notif_text_rom), System.currentTimeMillis());
+            notif.setLatestEventInfo(ctx, ctx.getString(R.string.notif_source), ctx.getString(R.string.notif_text_rom), contentIntent);
+        }
+        nm.notify(1, notif);
     }
 
     private static final char[] HEX_DIGITS = new char[] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
