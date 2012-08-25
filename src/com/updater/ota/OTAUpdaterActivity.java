@@ -42,6 +42,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.os.StatFs;
 import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
@@ -388,6 +389,14 @@ public class OTAUpdaterActivity extends PreferenceActivity {
 
                             URLConnection conn = getUrl.openConnection();
                             final int lengthOfFile = conn.getContentLength();
+                            
+                            StatFs stat = new StatFs(Config.DL_PATH);
+                            long availSpace = ((long) stat.getAvailableBlocks()) * ((long) stat.getBlockSize());
+                            if (lengthOfFile >= availSpace) {
+                                file.delete();
+                                return 3;
+                            }
+                            
                             if (lengthOfFile < 10000000) scale = 1024; //if less than 10 mb, scale using kb
                             publishProgress(0, lengthOfFile);
 
@@ -452,6 +461,9 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                             break;
                         case 2:
                             Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_interrupted, Toast.LENGTH_SHORT).show();
+                            break;
+                        case 3:
+                            Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_nospace, Toast.LENGTH_SHORT).show();
                             break;
                         default:
                             Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_error, Toast.LENGTH_SHORT).show();
