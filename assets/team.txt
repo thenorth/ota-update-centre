@@ -32,3 +32,10 @@ ganesh007
 cypis
 blk_jack
 NilsP
+
+TRANSLATERS
+Dexter93 - Greek
+M3nti0n - Dutch
+deus - Russian
+Yoel Dorfman - Hebrew
+kinghunki - Chinese
