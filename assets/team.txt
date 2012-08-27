@@ -33,7 +33,7 @@ cypis
 blk_jack
 NilsP
 
-TRANSLATERS
+TRANSLATORS
 ===========
 Dexter93 - Greek
 M3nti0n - Dutch
