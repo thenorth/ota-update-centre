@@ -3,8 +3,6 @@
 
     <string name="app_name">OTA Updater</string>
     
-    <string name="app_update_url" translatable="false">http://sensation-devs.org/romupdater2/pages/notthereyet.php</string>
-    
     <string name="notif_text_rom">OTA ROM Update Beschikbaar</string>
     <string name="notif_text_app">OTA App Update Beschikbaar</string>
     <string name="notif_source">OTA Updater</string>
@@ -55,7 +53,6 @@
     
     <string name="about_title">Over de app</string>
     <string name="about_ota_title">OTA Updater</string>
-    <string name="about_ota_summary" translatable="false">http://otaupdatecenter.pro</string>
     <string name="about_version_title">Versie</string>
     <string name="about_version_unknown">Onbekende Versie (fout in de manager)</string>
     

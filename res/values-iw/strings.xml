@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">מעדכן OTA</string>
-    <string name="app_update_url">http://sensation-devs.org/romupdater2/pages/notthereyet.php</string>
     <string name="notif_text_rom">עדכון OTA זמין</string>
     <string name="notif_text_app">עדכון אפליקציה זמין</string>
     <string name="notif_source">מעדכן OTA</string>
@@ -55,7 +54,6 @@
     <string name="toast_download_error">הייתה שגיאה בהורדה</string>
     <string name="about_title">אודות</string>
     <string name="about_ota_title">מעדכן OTA</string>
-    <string name="about_ota_summary">http://otaupdatecenter.pro</string>
     <string name="about_version_title">גירסא</string>
     <string name="about_version_unknown">Unkown Version (error in package manager)</string>
     <string name="main_device_info">נתוני מכשיר</string>
