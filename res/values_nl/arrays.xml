@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="file_actions">
+        <item>Installeer</item>
+        <item>Hernoem</item>
+        <item>Verwijder</item>
+    </string-array>
+    
+    <string-array name="install_options">
+        <!-- <item>Backup First</item> -->
+        <item>Verwijder Data</item>
+        <item>Verwijder Cache</item>
+    </string-array>
+    
+    <string-array name="file_ages">
+        <item>1 week</item>
+        <item>2 weken</item>
+        <item>1 maand</item>
+        <item>3 maanden</item>
+        <item>6 maanden</item>
+        <item>1 jaar</item>
+    </string-array>
+
+</resources>
