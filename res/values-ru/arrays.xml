@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="file_actions">
+        <item>Установить</item>
+        <item>Переименовать</item>
+        <item>Удалить</item>
+    </string-array>
+    
+    <string-array name="install_options">
+        <!-- <item>Backup First</item> -->
+        <item>Очистить данные</item>
+        <item>Очистить кэш</item>
+    </string-array>
+    
+    <string-array name="file_ages">
+        <item>1 неделя</item>
+        <item>2 недели</item>
+        <item>1 месяц</item>
+        <item>3 месяца</item>
+        <item>6 месяцев</item>
+        <item>1 год</item>
+    </string-array>
+
+</resources>
