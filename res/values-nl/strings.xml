@@ -68,7 +68,7 @@
     <string name="main_avail_updates">Beschikbare Updates</string>
     <string name="main_updates_none">Geen updates beschikbaar</string>
     <string name="main_updates_error">Fout bij het ophalen van update info: %1$s</string>
-    <string name="main_updates_new">"Nieuwe update: %1$s (versie %2$s)</string>
+    <string name="main_updates_new">Nieuwe update: %1$s (versie %2$s)</string>
 
     <string name="contributors_title">Vrijwilligers</string>
     <string name="contributors_error">Fout bij het laden van bestanden.</string>

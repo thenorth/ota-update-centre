@@ -71,7 +71,7 @@
     <string name="main_avail_updates">TIlgjengelige oppdateringer</string>
     <string name="main_updates_none">Ingen oppdateringer tilgjengelig</string>
     <string name="main_updates_error">Feil ved henting av oppdateringsinfo: %1$s</string>
-    <string name="main_updates_new">"Nye oppdateringer: %1$s (versjon %2$s)</string>
+    <string name="main_updates_new">Nye oppdateringer: %1$s (versjon %2$s)</string>
 
     <string name="contributors_title">Bidragsytere</string>
     <string name="contributors_error">Feil ved lasting av fil.</string>
