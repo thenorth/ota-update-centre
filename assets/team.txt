@@ -41,3 +41,5 @@ deus - Russian
 Yoel Dorfman - Hebrew
 kinghunki - Chinese
 Steffen Mossefinn - Norwegian
+Bogdan Vasile - Romanian
+thehamster95 - Danish
