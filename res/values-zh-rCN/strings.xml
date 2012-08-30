@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">OTA更新</string>
-    <string name="app_update_url">http://sensation-devs.org/romupdater2/pages/notthereyet.php</string>
     <string name="notif_text_rom">OTA ROM 更新可用</string>
     <string name="notif_text_app">OTA App 更新可用</string>
     <string name="notif_source">OTA更新</string>
