@@ -32,7 +32,7 @@
     <string name="alert_update_to">Αυτή η ενημέρωση, θα αναβαθμίσει τη ROM (%1$s) στην έκδοση %2$s</string>
     <string name="alert_prune_title">Διέγραψε αρχεία παλαιότερα απο</string>
     
-    <string name="menu_view">Προβολή Κατεβασμένων ROM</string>
+    <string name="menu_view">Προβολή Ληφθέντων ROM</string>
     <string name="menu_about">Σχετικά</string>
     <string name="menu_settings">Ρυθμίσεις</string>
     <string name="menu_refresh">Ανανέωση</string>
