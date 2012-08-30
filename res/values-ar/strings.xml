@@ -22,12 +22,12 @@
   <string name="alert_install_title">تثبيت ZIP</string>
   <string name="alert_install">تثبيت</string>
   <string name="alert_install_message">تثبيت هذا الملف سوف يعيد تشغيل الجهاز في recovery ليتم تثبيت ملف ZIP . بعد التثبيت، سوف يقوم النظام بإعادة التشغيل تلقائيا.</string>
-  <string name="alert_noinstall_message">Unfortunately, ROMs on your device must be flashed manually.\nPlease use the correct method for your device to flash the ROM\n\nThe .zip file is located at: %1$s</string>
+  <string name="alert_noinstall_message">للاسف، ROMs على جهازك يجب تثبيتها يدوياً.\nالرجاء استخدام الطريقة الصحيحة لتثبيت ROM على جهازك.\n\nملف .zip موجود في: %1$s</string>
   <string name="alert_update_title">متوفر تحديث ROM!</string>
   <string name="alert_download">نزل</string>
   <string name="alert_downloading">تنزيل…</string>
   <string name="alert_unsupported_title">ROM غير مدعومة</string>
-  <string name="alert_unsupported_message">The ROM developer has not enabled support for the OTA Updater! Please ask them (kindly) to add support before using this app!\n\n(otaupdater.otaid value empty or missing)</string>
+  <string name="alert_unsupported_message">مطور الروم لم يتيح امكانية التحديث عبر الجو! الرجاء الطلب منه (بلطف) أن اضافة الدعم قبل استخدام البرنامج!\n\n(قيمة otaupdater.otaid فارغة أو مفقودة)</string>
   <string name="alert_update_to">هذا سوف يقوم بتحديث الروم (%1$s) إلى الإصدار %2$s</string>
   <string name="alert_prune_title">حذف الملفات الأقدم من</string>
   <string name="menu_view">عرض ROM التي تم تنزيلها</string>
