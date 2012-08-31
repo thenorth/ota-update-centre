@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">OTA更新</string>
     <string name="notif_text_rom">OTA ROM 更新可用</string>
-    <string name="notif_text_app">OTA App 更新可用</string>
     <string name="notif_source">OTA更新</string>
     <string name="alert_nodata_title">没有数据连接!</string>
     <string name="alert_nodata_message">"你没有数据连接，

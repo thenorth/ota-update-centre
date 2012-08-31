@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">מעדכן OTA</string>
     <string name="notif_text_rom">עדכון OTA זמין</string>
-    <string name="notif_text_app">עדכון אפליקציה זמין</string>
     <string name="notif_source">מעדכן OTA</string>
     <string name="alert_nodata_title">אין חיבור דטה !</string>
     <string name="alert_nodata_message">"אין לך חיבור אינטרנט
@@ -29,7 +28,7 @@
 הקובץ נמצא ב: %1$s"</string>
     <string name="alert_update_title">עדכון רום זמין !</string>
     <string name="alert_download">הורדה</string>
-    <string name="alert_downloading">מוריד...</string>
+    <string name="alert_downloading">מוריד&#8230;</string>
     <string name="alert_unsupported_title">הרום לא נתמך</string>
     <string name="alert_unsupported_message">"אין תמיכה על ידי רום זה
 

@@ -3,7 +3,6 @@
 <resources>
   <string name="app_name">OTA Updater</string>
   <string name="notif_text_rom">Actualización OTA de ROM disponible</string>
-  <string name="notif_text_app">Actualización OTA de aplicación disponible</string>
   <string name="notif_source">OTA Updater</string>
   <string name="alert_nodata_title">¡No hay conexión de datos!</string>
   <string name="alert_nodata_message">No hay conexión de datos\nActive la conexión Wi-Fi o los Datos Móviles para poder buscar y descargar actualizaciones OTA.</string>

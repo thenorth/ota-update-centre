@@ -3,7 +3,6 @@
 <resources>
   <string name="app_name">OTA Updater</string>
   <string name="notif_text_rom">Actualizare disponibilă pentru ROM</string>
-  <string name="notif_text_app">Actualizare disponibilă pentru Aplicație</string>
   <string name="notif_source">OTA Updater</string>
   <string name="alert_nodata_title">Nici o conexiune de date!</string>
   <string name="alert_nodata_message">Nu aveti nici o conexiune activă \n Activați Wi-Fi sau conexiunea de date pentru a căuta si descărca actualizări OTA.</string>

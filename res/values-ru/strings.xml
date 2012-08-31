@@ -4,7 +4,6 @@
     <string name="app_name">OTA Обновление</string>
         
     <string name="notif_text_rom">Доступно обновление прошивки</string>
-    <string name="notif_text_app">Доступно обновление приложения</string>
     <string name="notif_source">OTA Обновление</string>
     
     <string name="alert_nodata_title">Отсутствует соединение!</string>

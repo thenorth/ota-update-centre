@@ -3,7 +3,6 @@
 <resources>
   <string name="app_name">OTA Updater</string>
   <string name="notif_text_rom">OTA ROM-opdatering tilgængelig</string>
-  <string name="notif_text_app">OTA App-opdatering tilgængelig</string>
   <string name="notif_source">OTA Updater</string>
   <string name="alert_nodata_title">Ingen dataforbindelse!</string>
   <string name="alert_nodata_message">Du har ingen data-forbindelse\nTænd venligst Wi-Fi eller mobil data for at søge efter, og hente OTA-opdateringer.</string>
@@ -27,7 +26,7 @@
   <string name="alert_downloading">Henter&#8230;</string>
   <string name="alert_unsupported_title">Ikke-understøttet ROM</string>
   <string name="alert_unsupported_message">Rom-udvikleren har ikke aktiveret understøttelse af OTA Updater! Anmod dem venligst (pænt) om at tilføje support før du bruger denne app! \n\n (otaupdater.otaid værdi er tom eller mangler)</string>
-  <string name="alert_update_to">Denne opdatering opdaterer din ROM (%1$ s) til version %2$ s</string>
+  <string name="alert_update_to">Denne opdatering opdaterer din ROM (%1$s) til version %2$s</string>
   <string name="alert_prune_title">Slet filer ældre end</string>
   <string name="menu_view">Vis hentede ROMs</string>
   <string name="menu_about">Om</string>
@@ -61,8 +60,8 @@
   <string name="main_updates">Opdateringer</string>
   <string name="main_avail_updates">Tilgængelige opdateringer</string>
   <string name="main_updates_none">Ingen tilgængelige opdateringer</string>
-  <string name="main_updates_error">Fejl under hentning af opdateringsinfo: %1$ s</string>
-  <string name="main_updates_new">Nye opdateringer: %1$ s (version %2$ s)</string>
+  <string name="main_updates_error">Fejl under hentning af opdateringsinfo: %1$s</string>
+  <string name="main_updates_new">Nye opdateringer: %1$s (version %2$s)</string>
   <string name="contributors_title">Bidragsydere</string>
   <string name="contributors_error">Fejl under indlæsning af fil.</string>
   <string name="settings_notifications">Meddelelses-indstillinger</string>

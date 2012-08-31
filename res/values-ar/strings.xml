@@ -3,7 +3,6 @@
 <resources>
   <string name="app_name">OTA Updater</string>
   <string name="notif_text_rom">توفر تحديث ROM OTA</string>
-  <string name="notif_text_app">توفر تحديث التطبيق OTA</string>
   <string name="notif_source">OTA Updater</string>
   <string name="alert_nodata_title">لا يوجد اتصال البيانات!</string>
   <string name="alert_nodata_message">لا يوجد لديك إتصال بيانات\nالرجاء تشغيل واي فاي أو البيانات المتنقلة من اجل التحقق من و تنزيل تحديثات عبر الجو.</string>

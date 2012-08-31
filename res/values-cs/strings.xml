@@ -3,7 +3,6 @@
 <resources>
   <string name="app_name">OTA Updater</string>
   <string name="notif_text_rom">OTA: je k dispozici aktualizace ROMky</string>
-  <string name="notif_text_app">Aktualizace aplikace OTA je k dispozici</string>
   <string name="notif_source">OTA Updater</string>
   <string name="alert_nodata_title">Žádná datová připojení!</string>
   <string name="alert_nodata_message">Nemáte žádná datová připojení\nProsím, zapněte Wi-Fi nebo mobilní data, vyhledejte aktualizace a začněte stahovat.</string>
@@ -21,13 +20,13 @@
   <string name="alert_install_title">Instalace ZIP</string>
   <string name="alert_install">Nainstalovat</string>
   <string name="alert_install_message">Instalaci souboru .zip proveďte v recovery modu vašeho zařízení. Po instalaci bude systém automaticky restartován.</string>
-  <string name="alert_noinstall_message">Bohužel, ROM na vaše zařízení je třeba naflashovat manuálně. \nPoužijte prosím správnou metodu pro flahování ROM na vaše zařízení\n\nSoubor .zip se nachází v: %1$ s</string>
+  <string name="alert_noinstall_message">Bohužel, ROM na vaše zařízení je třeba naflashovat manuálně. \nPoužijte prosím správnou metodu pro flahování ROM na vaše zařízení\n\nSoubor .zip se nachází v: %1$s</string>
   <string name="alert_update_title">K dispozici je aktualizace vaší ROMky!</string>
   <string name="alert_download">Stáhnout</string>
   <string name="alert_downloading">Stahování&#8230;</string>
   <string name="alert_unsupported_title">Nepodporovaná ROM</string>
   <string name="alert_unsupported_message">Vývojář vaší ROMky nepovolil podporu pro OTA Updater! Požádejte jej (laskavě) o přidání podpory vaší ROMky pro tuto aplikaci! \n. \n (otaupdater.otaid hodnota prázdná nebo chybí)</string>
-  <string name="alert_update_to">Tato aktualizace bude aktualizovat vaši ROM (%1$ s) na verzi %2$ s</string>
+  <string name="alert_update_to">Tato aktualizace bude aktualizovat vaši ROM (%1$s) na verzi %2$s</string>
   <string name="alert_prune_title">Smazat soubory starší než</string>
   <string name="menu_view">Zobrazit stažené ROMky</string>
   <string name="menu_about">O</string>
@@ -61,8 +60,8 @@
   <string name="main_updates">Aktualizace</string>
   <string name="main_avail_updates">Aktualizace jsou k dispozici</string>
   <string name="main_updates_none">Žádné dostupné aktualizace</string>
-  <string name="main_updates_error">Chyba při načítání informace o aktualizaci: %1$ s</string>
-  <string name="main_updates_new">Nové aktualizace: %1$ s (verze %2$ s)</string>
+  <string name="main_updates_error">Chyba při načítání informace o aktualizaci: %1$s</string>
+  <string name="main_updates_new">Nové aktualizace: %1$s (verze %2$s)</string>
   <string name="contributors_title">Přispěvatelé</string>
   <string name="contributors_error">Chyba při načítání souboru.</string>
   <string name="settings_notifications">Nastavení upozorňování</string>

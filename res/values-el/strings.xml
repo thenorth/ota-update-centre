@@ -4,7 +4,6 @@
     <string name="app_name">OTA Updater</string>
     
     <string name="notif_text_rom">Ενημέρωση OTA ROM Διαθέσιμη</string>
-    <string name="notif_text_app">Ενημέρωση Εφαρμογής OTA Διαθεσιμη</string>
     <string name="notif_source">OTA Updater</string>
     
     <string name="alert_nodata_title">Μή διαθέσιμη συνδεση δεδομένων!</string>

@@ -4,7 +4,6 @@
     <string name="app_name">OTA Updater</string>
 
     <string name="notif_text_rom">OTA ROM Oppdatering Tilgjengelig</string>
-    <string name="notif_text_app">OTA App Oppdarering Tilgjengelig</string>
     <string name="notif_source">OTA Updater</string>
 
     <string name="alert_nodata_title">Ingen Datatilkobling!</string>

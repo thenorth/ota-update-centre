@@ -3,7 +3,6 @@
 <resources>
   <string name="app_name">OTA Updater</string>
   <string name="notif_text_rom">آپدیت رام در دسترس است</string>
-  <string name="notif_text_app">آپدیت برنامه در دسترس است</string>
   <string name="notif_source">OTA Updater</string>
   <string name="alert_nodata_title">بدون اتصال داده!</string>
   <string name="alert_nodata_message">هیچ اتصال داده ای وجود ندارد. لطفا برای بررسی وجود و دانلود آپدیت ها، شبکه ی وای فای یا شبکه داده ی همراه را روشن کنید.</string>
@@ -21,13 +20,13 @@
   <string name="alert_install_title">نصب زیپ</string>
   <string name="alert_install">نصب</string>
   <string name="alert_install_message">برای نصب فایل باید گوشی در حالت ریکاوری راه اندازی مجدد شود تا فایل زیپ نصب گردد. بعد از نصب، سیستم به صورت خودکار دوباره راه اندازی می شود.</string>
-  <string name="alert_noinstall_message">متاسفانه رام شما باید به صورت دستی نصب شود. لطفا از روش درست  برای نصب رام خود استفاده کنید. فایل فشرده ی رام در %1 واقع است.</string>
+  <string name="alert_noinstall_message">متاسفانه رام شما باید به صورت دستی نصب شود. لطفا از روش درست  برای نصب رام خود استفاده کنید. فایل فشرده ی رام در %1$s واقع است.</string>
   <string name="alert_update_title">آپدیت رام موجود است!</string>
   <string name="alert_download">دانلود</string>
-  <string name="alert_downloading">در حال دانلود...</string>
+  <string name="alert_downloading">در حال دانلود&#8230;</string>
   <string name="alert_unsupported_title">رام پشتیبانی نشده</string>
   <string name="alert_unsupported_message">سازنده ی رام شما از OTA Updater پشتیبانی نمی کند. قبل از اینکه از این برنامه استفاده کنید، لطفا با مهربانی از او درخواست کنید تا پشتیبانی از این برنامه را به رام خود اضافه کند. (مقدار otaupdater.otaid موجود نیست(</string>
-  <string name="alert_update_to">این آپدیت رام شما را به نسخه ی (%1) به روزرسانی می کند</string>
+  <string name="alert_update_to">این آپدیت رام شما را به نسخه ی (%1$s) به روزرسانی می کند</string>
   <string name="alert_prune_title">حذف فایل های قدیمی تر از</string>
   <string name="menu_view">مشاهده ی رام های دانلود شده</string>
   <string name="menu_about">درباره</string>
@@ -61,8 +60,8 @@
   <string name="main_updates">آپدیت</string>
   <string name="main_avail_updates">آپدیتهای موجود</string>
   <string name="main_updates_none">آپدیتی در دسترس نیست</string>
-  <string name="main_updates_error">خطا در هنگام دریافت اطلاعات آپدیت: %1</string>
-  <string name="main_updates_new">آپدیت جدید: %1 (نسخه ی %1 (</string>
+  <string name="main_updates_error">خطا در هنگام دریافت اطلاعات آپدیت: %1$s</string>
+  <string name="main_updates_new">آپدیت جدید: %1$s (نسخه ی %2$s)</string>
   <string name="contributors_title">مشارکت کننده گان</string>
   <string name="contributors_error">خطا در بارگذاری فایل.</string>
   <string name="settings_notifications">تنظیمات گزارش</string>
