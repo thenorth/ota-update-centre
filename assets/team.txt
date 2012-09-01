@@ -37,7 +37,7 @@ TRANSLATORS
 ===========
 Dexter93 - Greek
 M3nti0n - Dutch
-deus - Russian
+Dennis Kopin - Russian
 Yoel Dorfman - Hebrew
 kinghunki - Chinese
 Steffen Mossefinn - Norwegian
