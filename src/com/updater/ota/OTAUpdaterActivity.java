@@ -30,6 +30,7 @@ import java.text.Normalizer;
 import java.text.Normalizer.Form;
 import java.util.Date;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
@@ -39,6 +40,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
@@ -66,9 +68,13 @@ final class Slugify {
         return toReturn;
     }
 
+    @TargetApi(9)
     private static String normalize(String input) {
         if (input == null || input.length() == 0) return "";
-        return Normalizer.normalize(input, Form.NFD).replaceAll("[^\\p{ASCII}]","");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+            input = Normalizer.normalize(input, Form.NFD);
+        }
+        return input.replaceAll("[^\\p{ASCII}]","");
     }
 }
 

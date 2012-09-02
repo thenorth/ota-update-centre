@@ -4,9 +4,8 @@
     android:versionCode="6"
     android:versionName="0.99-RC7">
 
-    <uses-sdk android:minSdkVersion="9" android:targetSdkVersion="16" />
+    <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="16" />
 
-    
     <permission android:name="com.updater.ota.permission.C2D_MESSAGE" android:protectionLevel="signature" />
     
     <uses-permission android:name="android.permission.REBOOT" />
