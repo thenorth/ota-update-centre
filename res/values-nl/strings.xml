@@ -40,8 +40,8 @@
     
     <string name="toast_rename">Bestand succesvol hernoemd</string>
     <string name="toast_rename_error">Er was een probleem tijdens het hernoemen van dit bestand</string>
-    <string name="toast_delete">Bestand succesvol hernoemd</string>
-    <string name="toast_delete_error">Er was een probleem tijdens het hernoemen van het bestand</string>
+    <string name="toast_delete">Bestand succesvol verwijderd</string>
+    <string name="toast_delete_error">Er was een probleem tijdens het verwijderen van het bestand</string>
     <string name="toast_prune">Oude bestanden succesvol verwijderd</string>
     <string name="toast_prune_error">Er was een probleem bij het verwijderen van oude bestanden</string>
     <string name="toast_no_updates">Er zijn momenteel geen updates beschikbaar</string>
