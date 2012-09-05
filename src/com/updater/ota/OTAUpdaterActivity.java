@@ -90,6 +90,8 @@ public class OTAUpdaterActivity extends PreferenceActivity {
     private boolean fetching = false;
     private Preference availUpdatePref;
 
+    private DownloadTask dlTask;
+
     /** Called when the activity is first created. */
     @Override
     @SuppressWarnings("deprecation")
@@ -110,10 +112,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                     finish();
                 }
             });
-            
-            //Allow the user to bypass the prompt which takes them out of the app. Let's them get a feel of the application.
             alert.setPositiveButton(R.string.alert_ignore, new DialogInterface.OnClickListener() {
-				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					// TODO Auto-generated method stub
@@ -173,18 +172,40 @@ public class OTAUpdaterActivity extends PreferenceActivity {
 
             availUpdatePref = findPreference("avail_updates");
 
-            Intent i = getIntent();
-            if (i.getAction().equals(NOTIF_ACTION)) {
-                if (Utils.dataAvailable(getApplicationContext())) {
-                    dialogFromNotif = true;
-                    showUpdateDialog(RomInfo.fromIntent(i));
+            Object savedInstance = getLastNonConfigurationInstance();
+            if (savedInstance != null && savedInstance instanceof DownloadTask) {
+                dialogFromNotif = true;
+                dlTask = (DownloadTask) savedInstance;
+
+                final ProgressDialog progressDialog = new ProgressDialog(this);
+                progressDialog.setTitle(R.string.alert_downloading);
+                progressDialog.setMessage("Changelog: " + dlTask.getRomInfo().changelog);
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                progressDialog.setCancelable(false);
+                progressDialog.setProgress(0);
+                progressDialog.setButton(Dialog.BUTTON_NEGATIVE, getString(R.string.alert_cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        progressDialog.dismiss();
+                        dlTask.cancel(true);
+                    }
+                });
+                dlTask.attach(progressDialog);
+                progressDialog.show();
+            } else {
+                Intent i = getIntent();
+                if (i.getAction().equals(NOTIF_ACTION)) {
+                    if (Utils.dataAvailable(getApplicationContext())) {
+                        dialogFromNotif = true;
+                        showUpdateDialog(RomInfo.fromIntent(i));
+                    } else {
+                        checkOnResume = true;
+                    }
                 } else {
                     checkOnResume = true;
                 }
-            } else {
-                checkOnResume = true;
+                ignoredDataWarn = false;
             }
-            ignoredDataWarn = false;
         }
     }
 
@@ -246,6 +267,14 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                 checkOnResume = false;
             }
         }
+    }
+
+    @Override
+    public Object onRetainNonConfigurationInstance() {
+        dlTask.detach();
+        if (dlTask.isDone()) return null;
+        
+        return dlTask;
     }
 
     @Override
@@ -320,7 +349,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
     }
 
     private void showUpdateDialog(final RomInfo info) {
-        AlertDialog.Builder alert = new AlertDialog.Builder(OTAUpdaterActivity.this);
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
         alert.setTitle(R.string.alert_update_title);
         alert.setMessage(getString(R.string.alert_update_to, info.romName, info.version));
         availUpdatePref.setSummary(getString(R.string.main_updates_new, info.romName, info.version));
@@ -372,139 +401,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                 progressDialog.setCancelable(false);
                 progressDialog.setProgress(0);
 
-                PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-                final WakeLock wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, UpdateCheckReceiver.class.getName());
-                wl.acquire();
-
-                final AsyncTask<Void, Integer, Integer> dlTask = new AsyncTask<Void, Integer, Integer>() {
-                    private int scale = 1048576;
-
-                    @Override
-                    protected void onPreExecute() {
-                        progressDialog.show();
-                    }
-
-                    @Override
-                    protected Integer doInBackground(Void... params) {
-                        InputStream is = null;
-                        OutputStream os = null;
-                        try {
-                            URL getUrl = new URL(info.url);
-                            Log.v("OTA::Download", "downloading from: " + getUrl);
-                            Log.d("OTA::Download", "downloading to: " + file.getAbsolutePath());
-
-                            URLConnection conn = getUrl.openConnection();
-                            final int lengthOfFile = conn.getContentLength();
-                            
-                            StatFs stat = new StatFs(Config.DL_PATH);
-                            long availSpace = ((long) stat.getAvailableBlocks()) * ((long) stat.getBlockSize());
-                            if (lengthOfFile >= availSpace) {
-                                file.delete();
-                                return 3;
-                            }
-                            
-                            if (lengthOfFile < 10000000) scale = 1024; //if less than 10 mb, scale using kb
-                            publishProgress(0, lengthOfFile);
-
-                            MessageDigest digest = MessageDigest.getInstance("MD5");
-
-                            conn.connect();
-                            is = new BufferedInputStream(getUrl.openStream());
-                            os = new FileOutputStream(file);
-
-                            byte[] buf = new byte[4096];
-                            int nRead = -1;
-                            int totalRead = 0;
-                            while ((nRead = is.read(buf)) != -1) {
-                                if (this.isCancelled()) break;
-                                os.write(buf, 0, nRead);
-                                digest.update(buf, 0, nRead);
-                                totalRead += nRead;
-                                publishProgress(totalRead);
-                            }
-
-                            if (isCancelled()) {
-                                file.delete();
-                                return 2;
-                            }
-
-                            String dlMd5 = Utils.byteArrToStr(digest.digest());
-                            Log.v("OTA::Download", "downloaded md5: " + dlMd5);
-                            if (!info.md5.equalsIgnoreCase(dlMd5)) {
-                                Log.w("OTA::Download", "downloaded md5 doesn't match " + info.md5);
-                                file.delete();
-                                return 1;
-                            }
-
-                            return 0;
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            file.delete();
-                        } finally {
-                            if (is != null) {
-                                try { is.close(); }
-                                catch (Exception e) { }
-                            }
-                            if (os != null) {
-                                try { os.flush(); os.close(); }
-                                catch (Exception e) { }
-                            }
-                        }
-                        return -1;
-                    }
-
-                    @Override
-                    protected void onCancelled(Integer result) {
-                        progressDialog.dismiss();
-                        wl.release();
-                        wl.acquire(Config.WAKE_TIMEOUT);
-
-                        switch (result) {
-                        case 0:
-                            break;
-                        case 1:
-                            Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_md5_mismatch, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 2:
-                            Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_interrupted, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 3:
-                            Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_nospace, Toast.LENGTH_SHORT).show();
-                            break;
-                        default:
-                            Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_error, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    protected void onPostExecute(Integer result) {
-                        progressDialog.dismiss();
-                        wl.release();
-                        wl.acquire(Config.WAKE_TIMEOUT);
-
-                        switch (result) {
-                        case 0:
-                            ListFilesActivity.installFileDialog(OTAUpdaterActivity.this, file);
-                            break;
-                        case 1:
-                            Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_md5_mismatch, Toast.LENGTH_SHORT).show();
-                            break;
-                        case 2:
-                            Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_interrupted, Toast.LENGTH_SHORT).show();
-                            break;
-                        default:
-                            Toast.makeText(OTAUpdaterActivity.this, R.string.toast_download_error, Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    protected void onProgressUpdate(Integer... values) {
-                        if (values.length == 0) return;
-                        progressDialog.setProgress(values[0] / scale);
-                        if (values.length == 1) return;
-                        progressDialog.setMax(values[1] / scale);
-                    }
-                };
+                dlTask = new DownloadTask(progressDialog, info, file);
 
                 progressDialog.setButton(Dialog.BUTTON_NEGATIVE, getString(R.string.alert_cancel), new DialogInterface.OnClickListener() {
                     @Override
@@ -525,5 +422,178 @@ public class OTAUpdaterActivity extends PreferenceActivity {
             }
         });
         alert.create().show();
+    }
+
+    private static class DownloadTask extends AsyncTask<Void, Integer, Integer> {
+        private int scale = 1048576;
+
+        private ProgressDialog dialog = null;
+        private Context ctx = null;
+        private RomInfo info;
+        private File destFile;
+        private final WakeLock wl;
+        
+        private boolean done = false;
+
+        public DownloadTask(ProgressDialog dialog, RomInfo info, File destFile) {
+            this.attach(dialog);
+
+            this.info = info;
+            this.destFile = destFile;
+
+            PowerManager pm = (PowerManager) ctx.getSystemService(Context.POWER_SERVICE);
+            wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, OTAUpdaterActivity.class.getName());
+        }
+
+        public void attach(ProgressDialog dialog) {
+            this.dialog = dialog;
+            this.ctx = dialog.getContext();
+        }
+
+        public void detach() {
+            if (this.dialog != null) this.dialog.dismiss();
+            this.dialog = null;
+            this.ctx = null;
+        }
+        
+        public boolean isDone() {
+            return done;
+        }
+
+        public RomInfo getRomInfo() {
+            return info;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            done = false;
+            dialog.show();
+            wl.acquire();
+        }
+
+        @Override
+        protected Integer doInBackground(Void... params) {
+            InputStream is = null;
+            OutputStream os = null;
+            try {
+                URL getUrl = new URL(info.url);
+                Log.v("OTA::Download", "downloading from: " + getUrl);
+                Log.d("OTA::Download", "downloading to: " + destFile.getAbsolutePath());
+
+                URLConnection conn = getUrl.openConnection();
+                final int lengthOfFile = conn.getContentLength();
+
+                StatFs stat = new StatFs(Config.DL_PATH);
+                long availSpace = ((long) stat.getAvailableBlocks()) * ((long) stat.getBlockSize());
+                if (lengthOfFile >= availSpace) {
+                    destFile.delete();
+                    return 3;
+                }
+
+                if (lengthOfFile < 10000000) scale = 1024; //if less than 10 mb, scale using kb
+                publishProgress(0, lengthOfFile);
+
+                MessageDigest digest = MessageDigest.getInstance("MD5");
+
+                conn.connect();
+                is = new BufferedInputStream(conn.getInputStream());
+                os = new FileOutputStream(destFile);
+
+                byte[] buf = new byte[4096];
+                int nRead = -1;
+                int totalRead = 0;
+                while ((nRead = is.read(buf)) != -1) {
+                    if (this.isCancelled()) break;
+                    os.write(buf, 0, nRead);
+                    digest.update(buf, 0, nRead);
+                    totalRead += nRead;
+                    publishProgress(totalRead, lengthOfFile);
+                }
+
+                if (isCancelled()) {
+                    destFile.delete();
+                    return 2;
+                }
+
+                String dlMd5 = Utils.byteArrToStr(digest.digest());
+                Log.v("OTA::Download", "downloaded md5: " + dlMd5);
+                if (!info.md5.equalsIgnoreCase(dlMd5)) {
+                    Log.w("OTA::Download", "downloaded md5 doesn't match " + info.md5);
+                    destFile.delete();
+                    return 1;
+                }
+
+                return 0;
+            } catch (Exception e) {
+                e.printStackTrace();
+                destFile.delete();
+            } finally {
+                if (is != null) {
+                    try { is.close(); }
+                    catch (Exception e) { }
+                }
+                if (os != null) {
+                    try { os.flush(); os.close(); }
+                    catch (Exception e) { }
+                }
+            }
+            return -1;
+        }
+
+        @Override
+        protected void onCancelled(Integer result) {
+            done = true;
+            dialog.dismiss();
+            wl.release();
+            wl.acquire(Config.WAKE_TIMEOUT);
+
+            switch (result) {
+            case 0:
+                break;
+            case 1:
+                Toast.makeText(ctx, R.string.toast_download_md5_mismatch, Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                Toast.makeText(ctx, R.string.toast_download_interrupted, Toast.LENGTH_SHORT).show();
+                break;
+            case 3:
+                Toast.makeText(ctx, R.string.toast_download_nospace, Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                Toast.makeText(ctx, R.string.toast_download_error, Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            done = true;
+            dialog.dismiss();
+            wl.release();
+            wl.acquire(Config.WAKE_TIMEOUT);
+
+            switch (result) {
+            case 0:
+                ListFilesActivity.installFileDialog(ctx, destFile);
+                break;
+            case 1:
+                Toast.makeText(ctx, R.string.toast_download_md5_mismatch, Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                Toast.makeText(ctx, R.string.toast_download_interrupted, Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                Toast.makeText(ctx, R.string.toast_download_error, Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... values) {
+            if (dialog == null) return;
+
+            if (values.length == 0) return;
+            dialog.setProgress(values[0] / scale);
+            if (values.length == 1) return;
+            dialog.setMax(values[1] / scale);
+        }
     }
 }
