@@ -42,6 +42,7 @@ public class Config {
     }
 
     private boolean showNotif = true;
+    private boolean ignoredDataWarn = false;
     
     private int lastVersion = -1;
     private String lastDevice = null;
@@ -60,6 +61,7 @@ public class Config {
         PREFS = ctx.getApplicationContext().getSharedPreferences(PREFS_NAME, 0);
 
         showNotif = PREFS.getBoolean("showNotif", showNotif);
+        ignoredDataWarn = PREFS.getBoolean("ignoredDataWarn", ignoredDataWarn);
         
         lastVersion = PREFS.getInt("version", lastVersion);
         lastDevice = PREFS.getString("device", lastDevice);
@@ -80,6 +82,10 @@ public class Config {
         }
         curDevice = android.os.Build.DEVICE.toLowerCase();
         curRomID = Utils.getRomID();
+        
+        if (!upToDate()) {
+            setIgnoredDataWarn(false);
+        }
     }
     private static Config instance = null;
     public static synchronized Config getInstance(Context ctx) {
@@ -96,6 +102,19 @@ public class Config {
         synchronized (PREFS) {
             SharedPreferences.Editor editor = PREFS.edit();
             editor.putBoolean("showNotif", showNotif);
+            editor.commit();
+        }
+    }
+
+    public boolean getIgnoredDataWarn() {
+        return ignoredDataWarn;
+    }
+
+    public void setIgnoredDataWarn(boolean ignored) {
+        this.ignoredDataWarn = ignored;
+        synchronized (PREFS) {
+            SharedPreferences.Editor editor = PREFS.edit();
+            editor.putBoolean("ignoredDataWarn", ignored);
             editor.commit();
         }
     }
