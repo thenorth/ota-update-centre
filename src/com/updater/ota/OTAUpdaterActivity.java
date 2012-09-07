@@ -213,7 +213,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
         boolean connected = ni != null && ni.isConnected();
-        if ((!connected || ni.getType() == ConnectivityManager.TYPE_MOBILE) && !cfg.getIgnoredDataWarn() && !dialogFromNotif) {
+        if ((!connected || ni.getType() == ConnectivityManager.TYPE_MOBILE) && !cfg.getIgnoredDataWarn() && !dialogFromNotif && Utils.isROMSupported()) {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
             alert.setTitle(connected ? R.string.alert_nowifi_title : R.string.alert_nodata_title);
             alert.setMessage(connected ? R.string.alert_nowifi_message : R.string.alert_nodata_message);
@@ -320,6 +320,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
 
     private void checkForRomUpdates() {
         if (fetching) return;
+        if (!Utils.isROMSupported()) return;
         new FetchRomInfoTask(this, new RomInfoListener() {
             @Override
             public void onStartLoading() {
