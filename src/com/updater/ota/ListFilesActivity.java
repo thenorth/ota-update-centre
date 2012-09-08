@@ -259,8 +259,9 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                                 
                                 os.writeBytes("echo '--update_package=/" + Utils.getRcvrySdPath() + "/OTA-Updater/download/" + name + "' >> /cache/recovery/command\n");
                                 
-                                if (!android.os.Build.DEVICE.toLowerCase().equals("gt-i9100")) {
-                                    os.writeBytes("reboot recovery\n");
+                                String rebootCmd = Utils.getRebootCmd();
+                                if (!rebootCmd.equals("$$NULL$$")) {
+                                    os.writeBytes(rebootCmd + "\n");
                                 }
                                 
                                 os.writeBytes("exit\n");

@@ -41,6 +41,7 @@ public class Utils {
     private static String cachedOtaVer = null;
     private static String cachedOSSdPath = null;
     private static String cachedRcvrySdPath = null;
+    private static String cachedRebootCmd = null;
     
     public static boolean marketAvailable(Context ctx) {
         PackageManager pm = ctx.getPackageManager();
@@ -82,6 +83,16 @@ public class Utils {
     		}
     	}
     	return cachedRcvrySdPath;
+    }
+    
+    public static String getRebootCmd() {
+        if (cachedRebootCmd == null) {
+            cachedRebootCmd = getprop(Config.OTA_REBOOT_CMD_PROP);
+            if (cachedRebootCmd == null) {
+                cachedRebootCmd = "reboot recovery";
+            }
+        }
+        return cachedRebootCmd;
     }
     
     public static Date getOtaDate() {
