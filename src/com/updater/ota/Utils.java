@@ -120,7 +120,9 @@ public class Utils {
         try {
             p = pb.start();
             is = p.getInputStream();
-            String prop = new Scanner(is).next();
+            Scanner scan = new Scanner(is);
+            scan.useDelimiter("\n");
+            String prop = scan.next();
             if (prop.length() == 0) return null;
             return prop;
         } catch (NoSuchElementException e) {
