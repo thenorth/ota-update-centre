@@ -26,6 +26,7 @@ public class Config {
     public static final String GCM_SENDER_ID = "1068482628480";
     public static final String GCM_REGISTER_URL = "https://www.otaupdatecenter.pro/pages/regdevice2.php";
     public static final String PULL_URL = "https://www.otaupdatecenter.pro/pages/romupdate.php";
+    public static final String DONATE_URL = "https://www.otaupdatecenter.pro/?page=paypal_donate";
     public static final String OTA_ID_PROP = "otaupdater.otaid";
     public static final String OTA_VER_PROP = "otaupdater.otaver";
     public static final String OTA_DATE_PROP = "otaupdater.otatime";

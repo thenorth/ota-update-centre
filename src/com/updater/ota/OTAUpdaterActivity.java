@@ -39,6 +39,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -305,6 +306,10 @@ public class OTAUpdaterActivity extends PreferenceActivity {
         	break;
         case R.id.about:
             i = new Intent(this, UpdaterAbout.class);
+            startActivity(i);
+            break;
+        case R.id.donate:
+            i = new Intent(Intent.ACTION_VIEW, Uri.parse(Config.DONATE_URL));
             startActivity(i);
             break;
         case R.id.exit:

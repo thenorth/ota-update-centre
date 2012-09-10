@@ -37,6 +37,7 @@
     <string name="menu_refresh">Refresh</string>
     <string name="menu_exit">Exit</string>
     <string name="menu_prune">Delete old Files</string>
+    <string name="menu_donate">Donate</string>
     
     <string name="toast_rename">File renamed successfully</string>
     <string name="toast_rename_error">There was a problem while renaming the selected file</string>
