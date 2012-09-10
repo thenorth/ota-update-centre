@@ -33,6 +33,7 @@ public class Config {
     public static final String OTA_SD_PATH_OS_PROP = "otaupdater.sdcard.os";
     public static final String OTA_SD_PATH_RECOVERY_PROP = "otaupdater.sdcard.recovery";
     public static final String OTA_REBOOT_CMD_PROP = "otaupdater.rebootcmd";
+    public static final String OTA_NOFLASH_PROP = "otaupdater.noflash";
 
     public static final int WAKE_TIMEOUT = 30000;
 

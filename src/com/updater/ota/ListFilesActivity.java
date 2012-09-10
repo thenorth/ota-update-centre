@@ -213,7 +213,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
         AlertDialog.Builder alert = new AlertDialog.Builder(ctx);
         alert.setTitle(R.string.alert_install_title);
 //        alert.setMessage(R.string.alert_install_message);
-        if (android.os.Build.DEVICE.toLowerCase().equals("gt-n7000")) { //can't flash programmatically, must flash manually
+        if (Utils.getNoflash()) { //can't flash programmatically, must flash manually
             alert.setMessage(ctx.getString(R.string.alert_noinstall_message, file.getAbsolutePath()));
             alert.setNeutralButton(R.string.alert_ok, new DialogInterface.OnClickListener() {
                 @Override
