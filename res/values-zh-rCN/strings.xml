@@ -28,7 +28,7 @@
 zip文件位于: %1$s\"</string>
     <string name="alert_update_title">ROM更新可用!</string>
     <string name="alert_download">下载</string>
-    <string name="alert_downloading">下载中&#8230;</string>
+    <string name="alert_downloading">下载中…</string>
     <string name="alert_unsupported_title">不支持的ROM</string>
     <string name="alert_unsupported_message">\"ROM 制作者没有启用 OTA 更新功能! 
 	
@@ -41,8 +41,8 @@ zip文件位于: %1$s\"</string>
     <string name="menu_refresh">刷新</string>
     <string name="menu_exit">退出</string>
     <string name="menu_prune">删除旧的文件</string>
-    <string name="menu_donate">Donate</string>
-    <string name="toast_rename">File renamed successfully</string>
+    <string name="menu_donate">捐款</string>
+    <string name="toast_rename">文件重命名成功</string>
     <string name="toast_rename_error">重命名所选的文件时出现问题</string>
     <string name="toast_delete">文件删除成功</string>
     <string name="toast_delete_error">删除所选的文件时出现问题</string>
@@ -50,12 +50,12 @@ zip文件位于: %1$s\"</string>
     <string name="toast_prune_error">删除旧的文件是出现问题</string>
     <string name="toast_no_updates">此时没有更新</string>
     <string name="toast_fetch_error">获取OTA信息时出现错误</string>
-    <string name="toast_download_nospace">There is not enough available space on your SD card!</string>
+    <string name="toast_download_nospace">SD卡中没有足够的使用空间</string>
     <string name="toast_download_interrupted">下载中断!</string>
     <string name="toast_download_md5_mismatch">MD5码错误-下载文件无效!</string>
     <string name="toast_download_error">下载出现错误!</string>
-    <string name="toast_nosd_shared">Your SD card is unavailable - mounted as USB Storage</string>
-    <string name="toast_nosd_error">Your SD card is unavailable</string>
+    <string name="toast_nosd_shared">你的SD卡不能使用－因为被USB使用</string>
+    <string name="toast_nosd_error">你的SD卡暂时无法使用</string>
     <string name="about_title">关于</string>
     <string name="about_ota_title">OTA更新</string>
     <string name="about_version_title">版本</string>
@@ -71,10 +71,10 @@ zip文件位于: %1$s\"</string>
     <string name="main_updates_error">获取更新的错误信息: %1$s</string>
     <string name="main_updates_new">新的更新包: %1$s (版本 %2$s)</string>
     <string name="contributors_title">更多介绍</string>
-    <string name="contributors_error">Error loading contributors file</string>
-    <string name="license_title">License</string>
-    <string name="license_apache_title">Apache License</string>
-    <string name="license_error">Error loading license file</string>
+    <string name="contributors_error">文件导入错误</string>
+    <string name="license_title">序列号</string>
+    <string name="license_apache_title">Apache序列号</string>
+    <string name="license_error">导入序列号文件错误</string>
     <string name="settings_notifications">通知设置</string>
     <string name="display_notifications">显示通知</string>
     <string name="notify_default">总在任务栏显示.</string>
