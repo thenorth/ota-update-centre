@@ -27,13 +27,10 @@ public class UpdaterAbout extends PreferenceActivity {
     private Preference versionPref;
     private Preference team;
     
-
     @Override
     @SuppressWarnings("deprecation")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
-        
         
         addPreferencesFromResource(R.xml.about);
 
@@ -46,16 +43,11 @@ public class UpdaterAbout extends PreferenceActivity {
         
         team = findPreference("team_pref");
         team.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-
 			@Override
 			public boolean onPreferenceClick(Preference preference) {
-				// TODO Auto-generated method stub
-				Intent i = new Intent(UpdaterAbout.this, Contributors.class);
-	            startActivity(i);
-				return false;
+	            startActivity(new Intent(UpdaterAbout.this, Contributors.class));
+				return true;
 			}
-        	
         });
-
     }
 }
