@@ -261,9 +261,14 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                                 
                                 String rebootCmd = Utils.getRebootCmd();
                                 if (!rebootCmd.equals("$$NULL$$")) {
-                                    os.writeBytes(rebootCmd + "\n");
+                                    if (rebootCmd.endsWith(".sh")) {
+                                        os.writeBytes("sh " + rebootCmd + "\n");
+                                    } else {
+                                        os.writeBytes(rebootCmd + "\n");
+                                    }
                                 }
                                 
+                                os.writeBytes("sync\n");
                                 os.writeBytes("exit\n");
                                 os.flush();
                                 p.waitFor();
