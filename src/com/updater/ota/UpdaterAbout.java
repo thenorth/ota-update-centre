@@ -26,6 +26,7 @@ import android.preference.PreferenceActivity;
 public class UpdaterAbout extends PreferenceActivity {
     private Preference versionPref;
     private Preference team;
+    private Preference license;
     
     @Override
     @SuppressWarnings("deprecation")
@@ -48,6 +49,15 @@ public class UpdaterAbout extends PreferenceActivity {
 	            startActivity(new Intent(UpdaterAbout.this, Contributors.class));
 				return true;
 			}
+        });
+        
+        license = findPreference("license_pref");
+        license.setOnPreferenceClickListener(new OnPreferenceClickListener() {
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                startActivity(new Intent(UpdaterAbout.this, License.class));
+                return true;
+            }
         });
     }
 }

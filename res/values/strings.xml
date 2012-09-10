@@ -71,7 +71,11 @@
     <string name="main_updates_new">New updates: %1$s (version %2$s)</string>
 
     <string name="contributors_title">Contributors</string>
-    <string name="contributors_error">Error loading file.</string>
+    <string name="contributors_error">Error loading contributors file</string>
+    
+    <string name="license_title">License</string>
+    <string name="license_apache_title">Apache License</string>
+    <string name="license_error">Error loading license file</string>
     
     <string name="settings_notifications">Notification Settings</string>
     <string name="display_notifications">Show Notifications</string>

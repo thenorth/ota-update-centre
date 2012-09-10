@@ -52,23 +52,27 @@
         
         <activity
             android:name=".ListFilesActivity"
-            android:label="@string/app_name">
+            android:label="@string/menu_view">
         </activity>
         
         <activity
             android:name=".UpdaterAbout"
-            android:label="@string/app_name">
+            android:label="@string/about_title">
         </activity>
         
         <activity
             android:name=".Contributors"
-            android:label="@string/app_name">
+            android:label="@string/contributors_title">
         </activity>
         
+        <activity
+            android:name=".License"
+            android:label="@string/license_title">
+        </activity>
         
         <activity
             android:name=".UpdaterSettings"
-            android:label="@string/app_name">
+            android:label="@string/menu_settings">
         </activity>       
         
     </application>
