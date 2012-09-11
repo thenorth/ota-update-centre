@@ -62,7 +62,7 @@
     <string name="main_avail_updates">Tillgängliga uppdateringar</string>
     <string name="main_updates_none">Inga uppdateringar tillgängliga</string>
     <string name="main_updates_error">Fel att hämta uppdateringsinfo: %1$s</string>
-    <string name="main_updates_new">Nya uppdateringar: %1$ s (version %2$ s)</string>
+    <string name="main_updates_new">Nya uppdateringar: %1$s (version %2$s)</string>
     <string name="contributors_title">Bidragsgivare</string>
     <string name="contributors_error">Error loading contributors file</string>
     <string name="license_title">License</string>
