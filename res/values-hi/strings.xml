@@ -23,7 +23,7 @@
   <string name="alert_noinstall_message">दुर्भाग्य से, रोम अपने युक्ति पर ख़ुद से प्रसारित करना होगा.\nकृपया सही तरीके से रोम प्रसारित करे\n\n.zip फ़ाइल आपको यहाँ पे मिलेगा: %1$s</string>
   <string name="alert_update_title">रोम अद्यतन उपलब्ध!</string>
   <string name="alert_download">डाउनलोड</string>
-  <string name="alert_downloading">डाउनलोड प्रगति में है...</string>
+  <string name="alert_downloading">डाउनलोड प्रगति में है&#8230;</string>
   <string name="alert_unsupported_title">असमर्थित रोम</string>
   <string name="alert_unsupported_message">रोम डेवलपर ने OTA Updater के लिए समर्थन नहीं नहीं दिया है! कृपया इस उपकरण का उपयोग करने से पहले उन्हें समर्थन जोड़ने का अनुरोध करे! \n\n(otaupdater.otaid  रिक्त या गुम)</string>
   <string name="alert_update_to">यह आपके का संस्करण (%1$s) से %2$s में बदल देगा</string>

@@ -29,7 +29,7 @@
 הקובץ נמצא ב: %1$s\"</string>
   <string name="alert_update_title">עדכון רום זמין !</string>
   <string name="alert_download">הורדה</string>
-  <string name="alert_downloading">מוריד...</string>
+  <string name="alert_downloading">מוריד&#8230;</string>
   <string name="alert_unsupported_title">הרום לא נתמך</string>
   <string name="alert_unsupported_message">\"אין תמיכה על ידי רום זה
 

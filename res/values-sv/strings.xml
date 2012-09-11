@@ -20,7 +20,7 @@
     <string name="alert_install_title">Installera ZIP</string>
     <string name="alert_install">Installera</string>
     <string name="alert_install_message">Installerar filen kommer att starta om i recovery för att flasha ZIP-filen. Systemet kommer starta om automatiskt efter installationen.</string>
-    <string name="alert_noinstall_message">Tyvärr, ROMs på din enhet måste vara flashade manuellt. \nVänligen använd rätt metod för din enhet för att flasha ROMen\n\n.zip-filen finns i: %1$ s</string>
+    <string name="alert_noinstall_message">Tyvärr, ROMs på din enhet måste vara flashade manuellt. \nVänligen använd rätt metod för din enhet för att flasha ROMen\n\n.zip-filen finns i: %1$s</string>
     <string name="alert_update_title">ROM uppdatering tillgänglig!</string>
     <string name="alert_download">Hämta</string>
     <string name="alert_downloading">Hämtar&#8230;</string>
