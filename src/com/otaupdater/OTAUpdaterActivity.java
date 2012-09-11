@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.updater.ota;
+package com.otaupdater;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -57,7 +57,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.gcm.GCMRegistrar;
-import com.updater.ota.FetchRomInfoTask.RomInfoListener;
+import com.otaupdater.FetchRomInfoTask.RomInfoListener;
 
 final class Slugify {
 
@@ -80,7 +80,7 @@ final class Slugify {
 }
 
 public class OTAUpdaterActivity extends PreferenceActivity {
-    protected static final String NOTIF_ACTION = "com.updater.ota.action.NOTIF_ACTION";
+    protected static final String NOTIF_ACTION = "com.otaupdater.action.NOTIF_ACTION";
 
     private boolean dialogFromNotif = false;
     private boolean checkOnResume = false;

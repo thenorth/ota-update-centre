@@ -1,4 +1,4 @@
-package com.updater.ota;
+package com.otaupdater;
 
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;

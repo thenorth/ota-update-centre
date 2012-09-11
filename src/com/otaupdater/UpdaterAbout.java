@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.updater.ota;
+package com.otaupdater;
 
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;

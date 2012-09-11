@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.updater.ota;
+package com.otaupdater;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -26,7 +26,7 @@ import android.os.PowerManager.WakeLock;
 import android.util.Log;
 
 import com.google.android.gcm.GCMRegistrar;
-import com.updater.ota.FetchRomInfoTask.RomInfoListener;
+import com.otaupdater.FetchRomInfoTask.RomInfoListener;
 
 public class UpdateCheckReceiver extends BroadcastReceiver {
     @Override

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.updater.ota;
+package com.otaupdater;
 
 import java.io.DataOutputStream;
 import java.io.File;

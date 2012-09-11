@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.updater.ota;
+package com.otaupdater;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -28,7 +28,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-public class License extends Activity {
+public class Contributors extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +40,12 @@ public class License extends Activity {
             data = new StringBuilder(2048);
             char[] buf = new char[2048];
             int nRead = -1;
-            in = new BufferedReader(new InputStreamReader(getAssets().open("license.txt")));
+            in = new BufferedReader(new InputStreamReader(getAssets().open("team.txt")));
             while ((nRead = in.read(buf)) != -1) {
                 data.append(buf, 0, nRead);
             }
         } catch (IOException e) {
-            Log.e("OTA::Contrib", "IOException reading license file");
+        	Log.e("OTA::Contrib", "IOException reading contributor list");
             showErrorAndFinish();
             return;
         } finally {
@@ -67,14 +67,14 @@ public class License extends Activity {
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
-                setContentView(view);
+            	setContentView(view);
             }
         });
 
     }
 
     private void showErrorAndFinish() {
-        Toast.makeText(this, R.string.license_error, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.contributors_error, Toast.LENGTH_LONG).show();
         finish();
     }
 }
