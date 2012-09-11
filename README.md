@@ -20,11 +20,13 @@ Rom devs
       If your device cannot be rebooted with "adb shell reboot recovery", write a script that reboots your device and add these lines to your build.prop:
       If you cannot write such a script, use $$NULL$$ instead of the path - the app will then only try to reboot via PowerManager.
           otaudpater.rebootcmd=/path/to/rebootscript.sh -OR- $$NULL$$
+      If auto-flashing a ROM will do bad things to your device, and the user needs to flash manually, add the following to your build.prop:
+          otaupdater.noflash=1
       Go to: https://otaupdatecenter.pro to register an account, and add/update your rom.
 
 Known Bugs
 ==========
-      Samsung Galaxy series, HTC Rezound & Jelly Bean running devices do not work properly yet.
+      None so far!
 
 
 How to Build
