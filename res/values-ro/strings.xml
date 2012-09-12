@@ -29,7 +29,6 @@
     <string name="alert_options_title">Opţiuni</string>
     <string name="alert_rename_title">Redenumiţi fişierul</string>
     <string name="alert_rename_message">Introduceţi noul nume de fişier</string>
-    <string name="alert_ok">OK</string>
     <string name="alert_cancel">Revocare</string>
     <string name="alert_rename">Redenumire</string>
     <string name="alert_install_title">Instalaţi ZIP</string>

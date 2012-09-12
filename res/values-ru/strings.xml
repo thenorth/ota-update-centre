@@ -29,7 +29,6 @@
     <string name="alert_options_title">Опции</string>
     <string name="alert_rename_title">Переименовать файл</string>
     <string name="alert_rename_message">Введите новое имя файла</string>
-    <string name="alert_ok">OK</string>
     <string name="alert_cancel">Отмена</string>
     <string name="alert_rename">Переименовать</string>
     <string name="alert_install_title">Установить ZIP</string>

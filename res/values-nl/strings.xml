@@ -29,7 +29,6 @@
     <string name="alert_options_title">Opties</string>
     <string name="alert_rename_title">Hernoem bestand</string>
     <string name="alert_rename_message">Type nieuwe naam</string>
-    <string name="alert_ok">Oke</string>
     <string name="alert_cancel">Annuleer</string>
     <string name="alert_rename">Hernoem</string>
     <string name="alert_install_title">Installeer ZIP</string>

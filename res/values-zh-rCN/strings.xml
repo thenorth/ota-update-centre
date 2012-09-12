@@ -32,7 +32,6 @@
     <string name="alert_options_title">选项</string>
     <string name="alert_rename_title">重命名</string>
     <string name="alert_rename_message">输入新的文件名</string>
-    <string name="alert_ok">确定</string>
     <string name="alert_cancel">取消</string>
     <string name="alert_rename">重命名</string>
     <string name="alert_install_title">安装 ZIP</string>

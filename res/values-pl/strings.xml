@@ -29,7 +29,6 @@
     <string name="alert_options_title">Opcje</string>
     <string name="alert_rename_title">Zmień nazwę pliku</string>
     <string name="alert_rename_message">Wprowadź nową nazwę pliku</string>
-    <string name="alert_ok">OK</string>
     <string name="alert_cancel">Anuluj</string>
     <string name="alert_rename">Zmień nazwę</string>
     <string name="alert_install_title">Instaluj z ZIP</string>

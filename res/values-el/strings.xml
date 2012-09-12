@@ -29,7 +29,6 @@
     <string name="alert_options_title">Επιλογές</string>
     <string name="alert_rename_title">Μετονομασία αρχείου</string>
     <string name="alert_rename_message">Εισάγετε νέο όνομα</string>
-    <string name="alert_ok">ΟΚ</string>
     <string name="alert_cancel">Ακύρωση</string>
     <string name="alert_rename">Μετονομασία</string>
     <string name="alert_install_title">Εγκατάσταση ZIP</string>

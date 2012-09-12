@@ -29,7 +29,6 @@
     <string name="alert_options_title">Innstillinger</string>
     <string name="alert_rename_title">Endre Filnavne</string>
     <string name="alert_rename_message">Skriv inn nytt filnavn</string>
-    <string name="alert_ok">OK</string>
     <string name="alert_cancel">Avbryt</string>
     <string name="alert_rename">Nytt Navn</string>
     <string name="alert_install_title">Installer ZIP</string>

@@ -27,7 +27,6 @@
     <string name="alert_options_title">Alternativ</string>
     <string name="alert_rename_title">Byt namn på filen</string>
     <string name="alert_rename_message">Ange nytt filnamn</string>
-    <string name="alert_ok">OK</string>
     <string name="alert_cancel">Avbryt</string>
     <string name="alert_rename">Byt namn</string>
     <string name="alert_install_title">Installera ZIP</string>

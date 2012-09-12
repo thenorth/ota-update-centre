@@ -29,7 +29,6 @@
     <string name="alert_options_title">Pasirinktys</string>
     <string name="alert_rename_title">Pervadinti failą</string>
     <string name="alert_rename_message">Įveskite naują failo vardą</string>
-    <string name="alert_ok">OK</string>
     <string name="alert_cancel">Atšaukti</string>
     <string name="alert_rename">Pervadinti</string>
     <string name="alert_install_title">Įdiegti ZIP</string>

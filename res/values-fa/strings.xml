@@ -31,7 +31,6 @@
     <string name="alert_options_title">گزینه ها</string>
     <string name="alert_rename_title">تغییر نام فایل</string>
     <string name="alert_rename_message">نام جدبد فایل را وارد نمایید</string>
-    <string name="alert_ok">تأیید</string>
     <string name="alert_cancel">لغو</string>
     <string name="alert_rename">تغییر نام</string>
     <string name="alert_install_title">نصب زیپ</string>

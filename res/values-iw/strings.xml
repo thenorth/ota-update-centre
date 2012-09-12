@@ -32,7 +32,6 @@
     <string name="alert_options_title">הגדרות</string>
     <string name="alert_rename_title">שינוי שם הקובץ</string>
     <string name="alert_rename_message">הכנס שם חדש</string>
-    <string name="alert_ok">אישור</string>
     <string name="alert_cancel">ביטול</string>
     <string name="alert_rename">שנה שם</string>
     <string name="alert_install_title">התקן ZIP</string>
