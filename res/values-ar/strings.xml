@@ -29,7 +29,6 @@
     <string name="alert_options_title">خيارات</string>
     <string name="alert_rename_title">إعادة تسمية الملف</string>
     <string name="alert_rename_message">أدخل اسم ملف جديد</string>
-    <string name="alert_ok">موافق</string>
     <string name="alert_cancel">إلغاء الأمر</string>
     <string name="alert_rename">إعادة تسمية</string>
     <string name="alert_install_title">تثبيت ZIP</string>

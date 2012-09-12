@@ -31,7 +31,6 @@
     <string name="alert_options_title">Options</string>
     <string name="alert_rename_title">Rename file</string>
     <string name="alert_rename_message">Enter new file name</string>
-    <string name="alert_ok">OK</string>
     <string name="alert_cancel">Cancel</string>
     <string name="alert_rename">Rename</string>
     <string name="alert_install_title">Install ZIP</string>

@@ -34,7 +34,7 @@
     <string name="alert_rename_message">输入新的文件名</string>
     <string name="alert_ok">确定</string>
     <string name="alert_cancel">取消</string>
-    <string name="alert_rename">改名</string>
+    <string name="alert_rename">重命名</string>
     <string name="alert_install_title">安装 ZIP</string>
     <string name="alert_install">安装</string>
     <string name="alert_install_message">安装文件将重新启动手机至恢复模式然后安装zip文件,安装完成后,系统将自动重新启动.</string>
@@ -43,7 +43,7 @@
 zip文件位于: %1$s\"</string>
     <string name="alert_update_title">ROM更新可用!</string>
     <string name="alert_download">下载</string>
-    <string name="alert_downloading">下载中…</string>
+    <string name="alert_downloading">下载中&#8230;</string>
     <string name="alert_unsupported_title">不支持的ROM</string>
     <string name="alert_unsupported_message">\"ROM 制作者没有启用 OTA 更新功能! 
 	

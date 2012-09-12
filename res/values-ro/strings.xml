@@ -49,7 +49,7 @@
     <string name="menu_refresh">Reîmprospătare</string>
     <string name="menu_exit">Ieşire</string>
     <string name="menu_prune">Ștergere fișiere vechi</string>
-    <string name="menu_donate">Donate</string>
+    <string name="menu_donate">Dona</string>
     <string name="toast_rename">Fişier redenumit cu succes</string>
     <string name="toast_rename_error">A existat o problemă la redenumirea fișierului selectat</string>
     <string name="toast_delete">Fişier şters cu succes</string>
@@ -79,10 +79,8 @@
     <string name="main_updates_error">Eroare la preluarea informațiilor actualizării: %1$s</string>
     <string name="main_updates_new">Actualizări noi: %1$s (versiunea %2$s)</string>
     <string name="contributors_title">Contributori</string>
-    <string name="contributors_error">Error loading contributors file</string>
-    <string name="license_title">License</string>
-    <string name="license_apache_title">Apache License</string>
-    <string name="license_error">Error loading license file</string>
+    <string name="license_title">Licența</string>
+    <string name="license_apache_title">Licența Apache</string>
     <string name="settings_notifications">Setările de notificare</string>
     <string name="display_notifications">Arată notificări</string>
     <string name="notify_default">Notificările sunt activate.</string>

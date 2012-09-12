@@ -49,7 +49,7 @@
     <string name="menu_refresh">Opdater</string>
     <string name="menu_exit">Afslut</string>
     <string name="menu_prune">Slet gamle filer</string>
-    <string name="menu_donate">Donate</string>
+    <string name="menu_donate">Donér</string>
     <string name="toast_rename">Filen blev omdøbt</string>
     <string name="toast_rename_error">Der opstod et problem under omdøbningen af den markerede fil</string>
     <string name="toast_delete">Filen blev slettet</string>
@@ -79,10 +79,10 @@
     <string name="main_updates_error">Fejl under hentning af opdateringsinfo: %1$s</string>
     <string name="main_updates_new">Nye opdateringer: %1$s (version %2$s)</string>
     <string name="contributors_title">Bidragsydere</string>
-    <string name="contributors_error">Error loading contributors file</string>
-    <string name="license_title">License</string>
-    <string name="license_apache_title">Apache License</string>
-    <string name="license_error">Error loading license file</string>
+    <string name="contributors_error">Fejl under indlæsning af bidragsydere fil</string>
+    <string name="license_title">Licens</string>
+    <string name="license_apache_title">Apache licens</string>
+    <string name="license_error">Fejl under indlæsning af licensfil</string>
     <string name="settings_notifications">Meddelelses-indstillinger</string>
     <string name="display_notifications">Vis meddelelser</string>
     <string name="notify_default">Meddelelser er slået til.</string>

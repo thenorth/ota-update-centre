@@ -16,9 +16,7 @@
 -->
 
 <resources>
-    <string name="app_name">OTA Updater</string>
     <string name="notif_text_rom">OTA ROM uppdatering tillgänglig</string>
-    <string name="notif_source">OTA Updater</string>
     <string name="alert_nodata_title">Ingen datanslutning!</string>
     <string name="alert_nodata_message">Du har ingen internetanslutning\nVänligen aktivera Wi-Fi eller Mobil\' Data för att söka efter och hämta OTA uppdateringar.</string>
     <string name="alert_nowifi_title">Ingen Wi-Fi Anslutning!</string>
@@ -49,8 +47,7 @@
     <string name="menu_refresh">Uppdatera</string>
     <string name="menu_exit">Avsluta</string>
     <string name="menu_prune">Ta bort gamla filer</string>
-    <string name="menu_donate">Donate</string>
-    <string name="toast_rename">File renamed successfully</string>
+    <string name="menu_donate">Donera</string>
     <string name="toast_rename_error">Det uppstod ett problem när du bytte namn på den valda filen</string>
     <string name="toast_delete">Filen togs bort utan fel</string>
     <string name="toast_delete_error">Det uppstod ett problem när du tog bort den valda filen</string>
@@ -63,7 +60,6 @@
     <string name="toast_download_md5_mismatch">MD5 fel - nerladdade filen ogiltig!</string>
     <string name="toast_download_error">Det uppstod ett fel med hämtningen!</string>
     <string name="toast_nosd_shared">Ditt SD-kort är inte tillgängligt - monterat som USB-lagring</string>
-    <string name="toast_nosd_error">Your SD card is unavailable</string>
     <string name="about_title">Om</string>
     <string name="about_ota_title">OTA Updater</string>
     <string name="about_version_title">Version</string>
@@ -79,10 +75,8 @@
     <string name="main_updates_error">Fel att hämta uppdateringsinfo: %1$s</string>
     <string name="main_updates_new">Nya uppdateringar: %1$s (version %2$s)</string>
     <string name="contributors_title">Bidragsgivare</string>
-    <string name="contributors_error">Error loading contributors file</string>
-    <string name="license_title">License</string>
+    <string name="license_title">Licens</string>
     <string name="license_apache_title">Apache License</string>
-    <string name="license_error">Error loading license file</string>
     <string name="settings_notifications">Notifikationsinställningar</string>
     <string name="display_notifications">Visa notifikationer</string>
     <string name="notify_default">Notifikationer är på.</string>

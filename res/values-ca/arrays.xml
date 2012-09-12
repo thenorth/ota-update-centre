@@ -17,20 +17,20 @@
 
 <resources>
     <string-array name="file_actions">
-        <item>Installer</item>
-        <item>Nytt Navn</item>
-        <item>Slett</item>
+        <item>Instal·lar</item>
+        <item>Canviar el nom</item>
+        <item>Suprimir</item>
     </string-array>
     <string-array name="install_options">
-        <item>Fjern Data</item>
-        <item>Fjern Cache</item>
+        <item>Wipe data</item>
+        <item>Wipe cache</item>
     </string-array>
     <string-array name="file_ages">
-        <item>1 uke</item>
-        <item>2 uker</item>
-        <item>1 måned</item>
-        <item>3 måneder</item>
-        <item>6 måneder</item>
-        <item>1 år</item>
+        <item>1 setmana</item>
+        <item>2 setmanes</item>
+        <item>1 mes</item>
+        <item>3 mesos</item>
+        <item>6 mesos</item>
+        <item>1 any</item>
     </string-array>
 </resources>

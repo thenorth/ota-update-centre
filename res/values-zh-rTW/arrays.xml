@@ -17,20 +17,20 @@
 
 <resources>
     <string-array name="file_actions">
-        <item>Installer</item>
-        <item>Nytt Navn</item>
-        <item>Slett</item>
+        <item>安裝</item>
+        <item>重新命名</item>
+        <item>刪除</item>
     </string-array>
     <string-array name="install_options">
-        <item>Fjern Data</item>
-        <item>Fjern Cache</item>
+        <item>清除 Data 分區</item>
+        <item>清除 Cache 分區</item>
     </string-array>
     <string-array name="file_ages">
-        <item>1 uke</item>
-        <item>2 uker</item>
-        <item>1 måned</item>
-        <item>3 måneder</item>
-        <item>6 måneder</item>
-        <item>1 år</item>
+        <item>1 周</item>
+        <item>2 周</item>
+        <item>1 月</item>
+        <item>3 月</item>
+        <item>6 月</item>
+        <item>1 年</item>
     </string-array>
 </resources>

@@ -22,8 +22,8 @@
         <item>Löschen</item>
     </string-array>
     <string-array name="install_options">
-        <item>Wipe Data</item>
-        <item>Wipe Cache</item>
+        <item>Daten löschen</item>
+        <item>Cache löschen</item>
     </string-array>
     <string-array name="file_ages">
         <item>1 Woche</item>

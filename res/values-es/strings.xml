@@ -49,7 +49,7 @@
     <string name="menu_refresh">Actualizar</string>
     <string name="menu_exit">Salir</string>
     <string name="menu_prune">Eliminar archivos antiguos</string>
-    <string name="menu_donate">Donate</string>
+    <string name="menu_donate">Donar</string>
     <string name="toast_rename">Archivo renombrado correctamente</string>
     <string name="toast_rename_error">Ha habido un problema al renombrar el archivo seleccionado</string>
     <string name="toast_delete">Archivo eliminado correctamente</string>
@@ -63,7 +63,7 @@
     <string name="toast_download_md5_mismatch">Error de MD5 - ¡archivo descargado inválido!</string>
     <string name="toast_download_error">¡Ha habido un error con la descarga!</string>
     <string name="toast_nosd_shared">La tarjeta SD no está disponible - montada como Almacenamiento USB</string>
-    <string name="toast_nosd_error">Your SD card is unavailable</string>
+    <string name="toast_nosd_error">Su tarjeta SD no está disponible</string>
     <string name="about_title">Acerca de</string>
     <string name="about_ota_title">OTA Updater</string>
     <string name="about_version_title">Versión</string>
@@ -79,10 +79,10 @@
     <string name="main_updates_error">Error recuperando la información de actualización: %1$s</string>
     <string name="main_updates_new">Nuevas actualizaciones: %1$s (versión %2$s)</string>
     <string name="contributors_title">Colaboradores</string>
-    <string name="contributors_error">Error loading contributors file</string>
-    <string name="license_title">License</string>
-    <string name="license_apache_title">Apache License</string>
-    <string name="license_error">Error loading license file</string>
+    <string name="contributors_error">Error al cargar archivo de colaboradores</string>
+    <string name="license_title">Licencia</string>
+    <string name="license_apache_title">Licencia de Apache</string>
+    <string name="license_error">Error al cargar el archivo de licencia</string>
     <string name="settings_notifications">Configuración de notificación</string>
     <string name="display_notifications">Mostrar notificaciones</string>
     <string name="notify_default">Notificaciones activadas.</string>

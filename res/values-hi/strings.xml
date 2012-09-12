@@ -29,7 +29,6 @@
     <string name="alert_options_title">विकल्प</string>
     <string name="alert_rename_title">फ़ाइल का नाम बदलें</string>
     <string name="alert_rename_message">फ़ाइल के लिए नया नाम दर्ज करें</string>
-    <string name="alert_ok">OK</string>
     <string name="alert_cancel">रद्द करें</string>
     <string name="alert_rename">नाम बदलें</string>
     <string name="alert_install_title">ZIP प्रसारित  करें</string>
@@ -49,7 +48,7 @@
     <string name="menu_refresh">फिर से प्रस्तुत करें</string>
     <string name="menu_exit">बाहर निकलें</string>
     <string name="menu_prune">पुरानी फ़ाइलों को मिटाओ</string>
-    <string name="menu_donate">Donate</string>
+    <string name="menu_donate">दान करे</string>
     <string name="toast_rename">फ़ाइल का नाम सफलतापूर्वक बदल दिया गया है</string>
     <string name="toast_rename_error">चुनि हुई फ़ाइल का नाम बदलने में बाधा है</string>
     <string name="toast_delete">पुरानी फ़ाइल को सफलतापूर्वक मिटाया गया है</string>
@@ -79,10 +78,8 @@
     <string name="main_updates_error">अद्यतन जानकारी प्राप्त करने में बाधा: %1$s</string>
     <string name="main_updates_new">नए अद्यतन: %1$s (संस्करण %2$s)</string>
     <string name="contributors_title">योगदानकर्ताये</string>
-    <string name="contributors_error">Error loading contributors file</string>
-    <string name="license_title">License</string>
-    <string name="license_apache_title">Apache License</string>
-    <string name="license_error">Error loading license file</string>
+    <string name="license_title">लाइसेंस</string>
+    <string name="license_apache_title">Apache लाइसेंस</string>
     <string name="settings_notifications">सूचना सेटिंग्स</string>
     <string name="display_notifications">सूचनाएँ दिखाएँ</string>
     <string name="notify_default">सूचनाओं चालू हैं.</string>
