@@ -40,7 +40,7 @@ public class Contributors extends Activity {
             data = new StringBuilder(2048);
             char[] buf = new char[2048];
             int nRead = -1;
-            in = new BufferedReader(new InputStreamReader(getAssets().open("team.txt")));
+            in = new BufferedReader(new InputStreamReader(getAssets().open("team.html")));
             while ((nRead = in.read(buf)) != -1) {
                 data.append(buf, 0, nRead);
             }
@@ -63,7 +63,7 @@ public class Contributors extends Activity {
         WebView webView = new WebView(this);
 
         // Begin the loading.  This will be done in a separate thread in WebView.
-        webView.loadDataWithBaseURL(null, data.toString(), "text/plain", "utf-8", null);
+        webView.loadDataWithBaseURL(null, data.toString(), "text/html", "utf-8", null);
         webView.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageFinished(WebView view, String url) {
