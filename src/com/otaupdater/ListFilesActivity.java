@@ -59,8 +59,9 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Config.DL_PATH_FILE.mkdirs(); //just in case
         String extState = Environment.getExternalStorageState();
-        if (!extState.equals(Environment.MEDIA_MOUNTED) && !extState.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) {
+        if ((!extState.equals(Environment.MEDIA_MOUNTED) && !extState.equals(Environment.MEDIA_MOUNTED_READ_ONLY)) || !Config.DL_PATH_FILE.exists()) {
             Toast.makeText(this, extState.equals(Environment.MEDIA_SHARED) ? R.string.toast_nosd_shared : R.string.toast_nosd_error, Toast.LENGTH_LONG).show();
             finish();
         }
