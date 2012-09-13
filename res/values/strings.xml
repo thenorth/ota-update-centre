@@ -70,7 +70,7 @@
     
     <string name="about_title">About</string>
     <string name="about_ota_title">OTA Updater</string>
-    <string name="about_ota_summary" translatable="false">http://otaupdatecenter.pro</string>
+    <string name="about_ota_summary" translatable="false">https://www.otaupdatecenter.pro</string>
     <string name="about_version_title">Version</string>
     <string name="about_version_unknown">Unkown Version (error in package manager)</string>
     

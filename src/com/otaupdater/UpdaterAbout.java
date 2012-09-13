@@ -18,46 +18,49 @@ package com.otaupdater;
 
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
-import android.preference.Preference.OnPreferenceClickListener;
 import android.preference.PreferenceActivity;
+import android.preference.PreferenceScreen;
 
 public class UpdaterAbout extends PreferenceActivity {
-    private Preference versionPref;
-    private Preference team;
-    private Preference license;
-    
+    private Preference teamPref;
+    private Preference licensePref;
+    private Preference sitePref;
+
     @Override
     @SuppressWarnings("deprecation")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         addPreferencesFromResource(R.xml.about);
 
-        versionPref = findPreference("about_version");
+        Preference versionPref = findPreference("about_version");
         try {
             versionPref.setSummary(getPackageManager().getPackageInfo(getPackageName(), 0).versionName);
         } catch (NameNotFoundException e) {
             versionPref.setSummary(R.string.about_version_unknown);
         }
-        
-        team = findPreference("team_pref");
-        team.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-			@Override
-			public boolean onPreferenceClick(Preference preference) {
-	            startActivity(new Intent(UpdaterAbout.this, Contributors.class));
-				return true;
-			}
-        });
-        
-        license = findPreference("license_pref");
-        license.setOnPreferenceClickListener(new OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                startActivity(new Intent(UpdaterAbout.this, License.class));
-                return true;
-            }
-        });
+
+        sitePref = findPreference("about_pref");
+        teamPref = findPreference("team_pref");
+        licensePref = findPreference("license_pref");
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+        if (preference == teamPref) {
+            startActivity(new Intent(UpdaterAbout.this, Contributors.class));
+        } else if (preference == licensePref) {
+            startActivity(new Intent(UpdaterAbout.this, License.class));
+        } else if (preference == sitePref) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.otaupdatecenter.pro")));
+        } else {
+            return super.onPreferenceTreeClick(preferenceScreen, preference);
+        }
+
+        return true;
     }
 }

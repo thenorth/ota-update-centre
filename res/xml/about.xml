@@ -21,7 +21,8 @@
 
         <Preference
             android:title="@string/about_ota_title"
-            android:summary="@string/about_ota_summary" />
+            android:summary="@string/about_ota_summary"
+            android:key="about_pref" />
         
         <Preference
             android:title="@string/about_version_title"
