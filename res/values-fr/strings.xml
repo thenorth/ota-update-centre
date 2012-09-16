@@ -29,7 +29,6 @@
     <string name="alert_options_title">Options</string>
     <string name="alert_rename_title">Renommez le fichier</string>
     <string name="alert_rename_message">Entrez le nouveau du fichier</string>
-    <string name="alert_ok">OK</string>
     <string name="alert_cancel">Annuler</string>
     <string name="alert_rename">Renommer</string>
     <string name="alert_install_title">Installer le fichier.zip</string>

@@ -78,8 +78,10 @@
     <string name="main_updates_error">अद्यतन जानकारी प्राप्त करने में बाधा: %1$s</string>
     <string name="main_updates_new">नए अद्यतन: %1$s (संस्करण %2$s)</string>
     <string name="contributors_title">योगदानकर्ताये</string>
+    <string name="contributors_error">योगदानकर्ताओं का फ़ाइल प्राप्त करने में बाधा</string>
     <string name="license_title">लाइसेंस</string>
     <string name="license_apache_title">Apache लाइसेंस</string>
+    <string name="license_error">लाइसेंस फ़ाइल प्राप्त करने में बाधा</string>
     <string name="settings_notifications">सूचना सेटिंग्स</string>
     <string name="display_notifications">सूचनाएँ दिखाएँ</string>
     <string name="notify_default">सूचनाओं चालू हैं.</string>
