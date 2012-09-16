@@ -86,8 +86,8 @@ public class OTAUpdaterActivity extends PreferenceActivity {
     private boolean checkOnResume = false;
     private Config cfg;
 
-    private boolean fetching = false;
     private Preference availUpdatePref;
+    private FetchRomInfoTask fetchTask = null;
 
     private DownloadTask dlTask;
 
@@ -267,19 +267,28 @@ public class OTAUpdaterActivity extends PreferenceActivity {
     }
 
     @Override
+    protected void onPause() {
+        if (isFinishing()) {
+            if (dlTask != null && !dlTask.isDone()) dlTask.cancel(true);
+        }
+        if (fetchTask != null) fetchTask.cancel(true);
+        super.onPause();
+    }
+
+    @Override
     public Object onRetainNonConfigurationInstance() {
         if (dlTask == null) return null;
-        
+
         dlTask.detach();
         if (dlTask.isDone()) return null;
-        
+
         return dlTask;
     }
 
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
         if (preference == availUpdatePref) {
-            if (!fetching) checkForRomUpdates();
+            if (fetchTask == null) checkForRomUpdates();
             return true;
         }
         return false;
@@ -323,16 +332,15 @@ public class OTAUpdaterActivity extends PreferenceActivity {
     }
 
     private void checkForRomUpdates() {
-        if (fetching) return;
+        if (fetchTask != null) return;
         if (!Utils.isROMSupported()) return;
-        new FetchRomInfoTask(this, new RomInfoListener() {
+        fetchTask = new FetchRomInfoTask(this, new RomInfoListener() {
             @Override
             public void onStartLoading() {
-                fetching = true;
             }
             @Override
             public void onLoaded(RomInfo info) {
-                fetching = false;
+                fetchTask = null;
                 if (info == null) {
                     availUpdatePref.setSummary(getString(R.string.main_updates_error, "Unknown error"));
                     Toast.makeText(OTAUpdaterActivity.this, R.string.toast_fetch_error, Toast.LENGTH_SHORT).show();
@@ -345,11 +353,12 @@ public class OTAUpdaterActivity extends PreferenceActivity {
             }
             @Override
             public void onError(String error) {
-                fetching = false;
+                fetchTask = null;
                 availUpdatePref.setSummary(getString(R.string.main_updates_error, error));
                 Toast.makeText(OTAUpdaterActivity.this, error, Toast.LENGTH_SHORT).show();
             }
-        }).execute();
+        });
+        fetchTask.execute();
     }
 
     private void showUpdateDialog(final RomInfo info) {
@@ -425,7 +434,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                 dialog.dismiss();
             }
         });
-        alert.create().show();
+        alert.show();
     }
 
     private static class DownloadTask extends AsyncTask<Void, Integer, Integer> {
@@ -436,7 +445,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
         private RomInfo info;
         private File destFile;
         private final WakeLock wl;
-        
+
         private boolean done = false;
 
         public DownloadTask(ProgressDialog dialog, RomInfo info, File destFile) {
@@ -459,7 +468,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
             this.dialog = null;
             this.ctx = null;
         }
-        
+
         public boolean isDone() {
             return done;
         }
@@ -550,6 +559,11 @@ public class OTAUpdaterActivity extends PreferenceActivity {
             dialog.dismiss();
             wl.release();
             wl.acquire(Config.WAKE_TIMEOUT);
+
+            if (result == null) {
+                Toast.makeText(ctx, R.string.toast_download_error, Toast.LENGTH_SHORT).show();
+                return;
+            }
 
             switch (result) {
             case 0:
