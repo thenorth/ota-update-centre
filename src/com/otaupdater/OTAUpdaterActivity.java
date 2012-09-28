@@ -112,11 +112,11 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                 }
             });
             alert.setPositiveButton(R.string.alert_ignore, new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					dialog.dismiss();
-				}
-			});
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
             alert.create().show();
 
             if (Utils.marketAvailable(this)) {
@@ -310,9 +310,9 @@ public class OTAUpdaterActivity extends PreferenceActivity {
             startActivity(i);
             break;
         case R.id.settings:
-        	i = new Intent(this, UpdaterSettings.class);
-        	startActivity(i);
-        	break;
+            i = new Intent(this, UpdaterSettings.class);
+            startActivity(i);
+            break;
         case R.id.about:
             i = new Intent(this, UpdaterAbout.class);
             startActivity(i);
@@ -372,41 +372,6 @@ public class OTAUpdaterActivity extends PreferenceActivity {
             public void onClick(DialogInterface dialog, int whichButton) {
                 dialog.dismiss();
 
-                String fileName = info.romName + "_" + info.version;
-                String slugifiedFileName = Slugify.slugify(fileName);
-
-                final File file = new File(Config.DL_PATH + slugifiedFileName + ".zip");
-                if (file.exists()) {
-                    Log.v("OTA::Download", "Found old zip, checking md5");
-
-                    InputStream is = null;
-                    try {
-                        is = new FileInputStream(file);
-                        MessageDigest digest = MessageDigest.getInstance("MD5");
-                        byte[] data = new byte[4096];
-                        int nRead = -1;
-                        while ((nRead = is.read(data)) != -1) {
-                            digest.update(data, 0, nRead);
-                        }
-                        String oldMd5 = Utils.byteArrToStr(digest.digest());
-                        Log.v("OTA::Download", "old zip md5: " + oldMd5);
-                        if (!info.md5.equalsIgnoreCase(oldMd5)) {
-                            file.delete();
-                        } else {
-                            ListFilesActivity.installFileDialog(OTAUpdaterActivity.this, file);
-                            return;
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        file.delete();
-                    } finally {
-                        if (is != null) {
-                            try { is.close(); }
-                            catch (Exception e) { }
-                        }
-                    }
-                }
-
                 final ProgressDialog progressDialog = new ProgressDialog(OTAUpdaterActivity.this);
                 progressDialog.setTitle(R.string.alert_downloading);
                 progressDialog.setMessage("Changelog: " + info.changelog);
@@ -414,6 +379,7 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                 progressDialog.setCancelable(false);
                 progressDialog.setProgress(0);
 
+                final File file = new File(Config.DL_PATH_FILE, Slugify.slugify(info.romName + "_" + info.version) + ".zip");
                 dlTask = new DownloadTask(progressDialog, info, file);
 
                 progressDialog.setButton(Dialog.BUTTON_NEGATIVE, getString(R.string.alert_cancel), new DialogInterface.OnClickListener() {
@@ -486,6 +452,36 @@ public class OTAUpdaterActivity extends PreferenceActivity {
 
         @Override
         protected Integer doInBackground(Void... params) {
+            if (destFile.exists()) {
+                Log.v("OTA::Download", "Found old zip, checking md5");
+
+                InputStream is = null;
+                try {
+                    is = new FileInputStream(destFile);
+                    MessageDigest digest = MessageDigest.getInstance("MD5");
+                    byte[] data = new byte[4096];
+                    int nRead = -1;
+                    while ((nRead = is.read(data)) != -1) {
+                        digest.update(data, 0, nRead);
+                    }
+                    String oldMd5 = Utils.byteArrToStr(digest.digest());
+                    Log.v("OTA::Download", "old zip md5: " + oldMd5);
+                    if (!info.md5.equalsIgnoreCase(oldMd5)) {
+                        destFile.delete();
+                    } else {
+                        return 0;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    destFile.delete();
+                } finally {
+                    if (is != null) {
+                        try { is.close(); }
+                        catch (Exception e) { }
+                    }
+                }
+            }
+
             InputStream is = null;
             OutputStream os = null;
             try {
