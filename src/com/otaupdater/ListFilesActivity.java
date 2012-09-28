@@ -45,9 +45,10 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
     public static final int DL_PATH_LEN = Config.DL_PATH.length();
 
     private void listFiles(File dir) {
-        File[] files = dir.listFiles();
         fileList.clear();
         pathList.clear();
+        File[] files = dir.listFiles();
+        if (files == null) return;
         for (File file : files) {
             fileList.add(file.getPath().substring(DL_PATH_LEN));
             pathList.add(file.getPath());
@@ -65,7 +66,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
             Toast.makeText(this, extState.equals(Environment.MEDIA_SHARED) ? R.string.toast_nosd_shared : R.string.toast_nosd_error, Toast.LENGTH_LONG).show();
             finish();
         }
-        
+
         fileListAdapter = new ArrayAdapter<String>(this, R.layout.row, R.id.filename, fileList);
         setListAdapter(fileListAdapter);
         listFiles(Config.DL_PATH_FILE);
@@ -224,6 +225,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
             });
         } else {
             alert.setMultiChoiceItems(installOpts, selectedOpts, new DialogInterface.OnMultiChoiceClickListener() {
+                @Override
                 public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                     selectedOpts[which] = isChecked;
                 }
@@ -241,7 +243,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                         public void onClick(DialogInterface dialog, int which) {
                             try {
                                 String name = file.getName();
-                                
+
                                 Process p = Runtime.getRuntime().exec("su");
                                 DataOutputStream os = new DataOutputStream(p.getOutputStream());
                                 os.writeBytes("rm -f /cache/recovery/command\n");
@@ -257,9 +259,9 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                                 if (selectedOpts[1]) {
                                     os.writeBytes("echo '--wipe_cache' >> /cache/recovery/command\n");
                                 }
-                                
+
                                 os.writeBytes("echo '--update_package=/" + Utils.getRcvrySdPath() + "/OTA-Updater/download/" + name + "' >> /cache/recovery/command\n");
-                                
+
                                 String rebootCmd = Utils.getRebootCmd();
                                 if (!rebootCmd.equals("$$NULL$$")) {
                                     if (rebootCmd.endsWith(".sh")) {
@@ -268,7 +270,7 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
                                         os.writeBytes(rebootCmd + "\n");
                                     }
                                 }
-                                
+
                                 os.writeBytes("sync\n");
                                 os.writeBytes("exit\n");
                                 os.flush();

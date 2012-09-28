@@ -39,14 +39,21 @@ public class Config {
 
     public static final String DL_PATH = "/" + Utils.getOSSdPath() + "/OTA-Updater/download/";
     public static final File DL_PATH_FILE = new File(Config.DL_PATH);
-    
+
     static {
-        DL_PATH_FILE.mkdirs();
+        if (DL_PATH_FILE.exists()) {
+            if (!DL_PATH_FILE.isDirectory()) {
+                DL_PATH_FILE.delete();
+                DL_PATH_FILE.mkdirs();
+            }
+        } else {
+            DL_PATH_FILE.mkdirs();
+        }
     }
 
     private boolean showNotif = true;
     private boolean ignoredDataWarn = false;
-    
+
     private int lastVersion = -1;
     private String lastDevice = null;
     private String lastRomID = null;
@@ -65,7 +72,7 @@ public class Config {
 
         showNotif = PREFS.getBoolean("showNotif", showNotif);
         ignoredDataWarn = PREFS.getBoolean("ignoredDataWarn", ignoredDataWarn);
-        
+
         lastVersion = PREFS.getInt("version", lastVersion);
         lastDevice = PREFS.getString("device", lastDevice);
         lastRomID = PREFS.getString("romid", lastRomID);
@@ -85,7 +92,7 @@ public class Config {
         }
         curDevice = android.os.Build.DEVICE.toLowerCase();
         curRomID = Utils.getRomID();
-        
+
         if (!upToDate()) {
             setIgnoredDataWarn(false);
         }
@@ -95,11 +102,11 @@ public class Config {
         if (instance == null) instance = new Config(ctx);
         return instance;
     }
-    
+
     public boolean getShowNotif() {
         return showNotif;
     }
-    
+
     public void setShowNotif(boolean showNotif) {
         this.showNotif = showNotif;
         synchronized (PREFS) {
