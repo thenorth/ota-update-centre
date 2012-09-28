@@ -16,8 +16,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.otaupdater"
-    android:versionCode="13"
-    android:versionName="1.0.3">
+    android:versionCode="14"
+    android:versionName="1.0.4">
 
     <uses-sdk android:minSdkVersion="8" android:targetSdkVersion="16" />
 
