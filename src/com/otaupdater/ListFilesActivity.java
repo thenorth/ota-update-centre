@@ -25,6 +25,7 @@ import android.app.ListActivity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.res.Resources;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.PowerManager;
@@ -253,14 +254,27 @@ public class ListFilesActivity extends ListActivity implements AdapterView.OnIte
 //                                            new SimpleDateFormat("yyyy-MM-dd_HH.mm").format(new Date()) +
 //                                            "' >> /cache/recovery/extendedcommand\n");
 //                                }
-                                if (selectedOpts[0]) {
-                                    os.writeBytes("echo '--wipe_data' >> /cache/recovery/command\n");
-                                }
-                                if (selectedOpts[1]) {
-                                    os.writeBytes("echo '--wipe_cache' >> /cache/recovery/command\n");
+                                if (Build.MANUFACTURER.toLowerCase().contains("sony")) {
+                                    if (selectedOpts[0]) {
+                                        os.writeBytes("echo 'format(\"/data\");' >> /cache/recovery/extendedcommand\n");
+                                    }
+                                    if (selectedOpts[1]) {
+                                        os.writeBytes("echo 'format(\"/cache\");' >> /cache/recovery/extendedcommand\n");
+                                    }
+
+                                    os.writeBytes("echo 'install_zip(\"/" + Utils.getRcvrySdPath() + "/OTA-Updater/download/" + name + "\");' >> /cache/recovery/extendedcommand\n");
+                                } else {
+                                    if (selectedOpts[0]) {
+                                        os.writeBytes("echo '--wipe_data' >> /cache/recovery/command\n");
+                                    }
+                                    if (selectedOpts[1]) {
+                                        os.writeBytes("echo '--wipe_cache' >> /cache/recovery/command\n");
+                                    }
+
+                                    os.writeBytes("echo '--update_package=/" + Utils.getRcvrySdPath() + "/OTA-Updater/download/" + name + "' >> /cache/recovery/command\n");
                                 }
 
-                                os.writeBytes("echo '--update_package=/" + Utils.getRcvrySdPath() + "/OTA-Updater/download/" + name + "' >> /cache/recovery/command\n");
+                                os.writeBytes("sync\n");
 
                                 String rebootCmd = Utils.getRebootCmd();
                                 if (!rebootCmd.equals("$$NULL$$")) {
