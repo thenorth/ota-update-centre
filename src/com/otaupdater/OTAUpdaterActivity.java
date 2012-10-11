@@ -490,6 +490,45 @@ public class OTAUpdaterActivity extends PreferenceActivity {
                 Log.d("OTA::Download", "downloading to: " + destFile.getAbsolutePath());
 
                 URLConnection conn = getUrl.openConnection();
+
+ 		// Start  
+                if(getUrl.toString().contains("goo.im")){
+                	
+                    // do a dl then wait for timer
+                	
+               	    conn.connect();
+        	    Log.v("OTA::Download", "Waiting out timer");
+                    publishProgress(-1); // pending on dialog
+                    
+                    // dl the catch page then wait
+                    is = new BufferedInputStream(conn.getInputStream());
+                    os = new FileOutputStream(destFile);
+                    
+                    // get the timer page all 15 
+                    byte[] buf = new byte[4096];
+                    int nRead = -1;
+                    while ((nRead = is.read(buf)) != -1) {
+                        if (this.isCancelled()) break;
+                        os.write(buf, 0, nRead);
+                    }
+
+                    // got hold page pause
+                    
+       		    try {
+        	    	Thread.sleep(10500); // pause the async task for 10.5 seconds
+            	    } catch (InterruptedException e) {
+            		// don't panic and reset the link            
+            	    }
+        	
+		    Log.v("OTA::Download", "Timer Complete, Continuing with File Download");
+			
+		    getUrl = new URL(info.url);
+		    conn = getUrl.openConnection();
+        			
+                }
+                
+                // end do your thing as normal
+
                 final int lengthOfFile = conn.getContentLength();
 
                 StatFs stat = new StatFs(Config.DL_PATH);
@@ -604,6 +643,13 @@ public class OTAUpdaterActivity extends PreferenceActivity {
         protected void onProgressUpdate(Integer... values) {
             if (dialog == null) return;
 
+            if (values[0] == -1) { // i'm not sure yet please hold
+            	dialog.setIndeterminate(true);
+            	return;
+            }
+            
+            dialog.setIndeterminate(false); // make sure dialog is ALWAYS sure for progress
+ 
             if (values.length == 0) return;
             dialog.setProgress(values[0] / scale);
             if (values.length == 1) return;
